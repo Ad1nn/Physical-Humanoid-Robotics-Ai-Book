@@ -31,7 +31,14 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+- [ ] **Practical-First Pedagogy**: Does the feature have a clear hands-on component and adhere to the 60/40 hands-on/theory split?
+- [ ] **Technical Accuracy**: Are all technical references (frameworks, libraries) version-specific as per the constitution?
+- [ ] **Progressive Complexity**: Does the feature fit logically within the book's beginner-to-expert learning progression?
+- [ ] **Simulation-First**: Is the feature designed to be implemented and tested primarily in a simulated environment?
+- [ ] **Content Quality**: Does the plan account for creating complete, tested, and runnable code examples?
+- [ ] **Code Standards**: Does the implementation plan adhere to Python (PEP 8, type hints) and ROS 2 (`rclpy`) best practices?
+- [ ] **Legal & Ethics**: Does the feature respect the MIT/CC BY 4.0 licenses and avoid prohibited applications (weaponization, surveillance)?
+- [ ] **Technical Constraints**: Does the plan respect the defined technical stack (ROS 2 Humble, Python 3.10, etc.)?
 
 ## Project Structure
 
