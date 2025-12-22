@@ -111,3 +111,13 @@ This feature primarily concerns the user interface and experience of the Docusau
 -   **SC-007**: Average page load time for primary content pages is consistently under 2 seconds on a typical broadband connection.
 -   **SC-008**: The website build process completes consistently under 5 minutes.
 -   **SC-009**: The website achieves a Google Lighthouse performance score of 90 or higher on desktop and mobile.
+
+## Clarifications
+
+### Session 2025-12-22
+
+- Q: What is the required security and privacy posture for the Docusaurus book website? → A: Standard Web Security
+- Q: What level of observability is required for the Docusaurus book website? → A: Basic Traffic Analytics
+- Q: How should the Docusaurus book website handle error, empty, and loading states in its UI? → A: Standard Docusaurus Defaults
+- Q: How should individual UI components on the Docusaurus book website handle internal errors or unexpected conditions? → A: Display Generic Error Message
+- Q: What are the reliability and availability expectations for the Docusaurus book website? → A: Best Effort (Hosting Default)

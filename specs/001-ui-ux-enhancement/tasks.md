@@ -13,14 +13,14 @@ This document outlines the actionable tasks for implementing the UI/UX enhanceme
 -   [x] T002 Install project dependencies (`npm install`) in `E:\SDD\Robotics_book`
 -   [x] T003 Create necessary custom theme directories and files for Docusaurus theming in `E:\SDD\Robotics_book/src/theme/`
 -   [x] T004 Configure Docusaurus to use custom theme and potentially Tailwind CSS or custom CSS in `E:\SDD\Robotics_book/docusaurus.config.js`
--   [ ] T005 Initialize Git repository and commit initial setup changes (if not already done) `E:\SDD\Robotics_book`
+-   [x] T005 Initialize Git repository and commit initial setup changes (if not already done) `E:\SDD\Robotics_book`
 
 ## Phase 2: Foundational (Blocking Prerequisites)
 
--   [ ] T006 Set up a basic custom Docusaurus layout for pages in `E:\SDD\Robotics_book/src/theme/Layout/`
--   [ ] T007 Implement initial responsive design breakpoints and base styles in `E:\SDD\Robotics_book/src/css/custom.css`
--   [ ] T008 Configure Playwright for E2E testing in `E:\SDD\Robotics_book/frontend/tests/e2e/`
--   [ ] T009 Configure Jest/React Testing Library for component testing in `E:\SDD\Robotics_book/frontend/tests/component/`
+-   [x] T006 Set up a basic custom Docusaurus layout for pages in `E:\SDD\Robotics_book/src/theme/Layout/`
+-   [x] T007 Implement initial responsive design breakpoints and base styles in `E:\SDD\Robotics_book/src/css/custom.css`
+-   [x] T008 Configure Playwright for E2E testing in `E:\SDD\Robotics_book/frontend/tests/e2e/`
+-   [x] T009 Configure Jest/React Testing Library for component testing in `E:\SDD\Robotics_book/frontend/tests/component/`
 
 ## Phase 3: User Story 1 - Navigate Content (Priority: P1)
 
