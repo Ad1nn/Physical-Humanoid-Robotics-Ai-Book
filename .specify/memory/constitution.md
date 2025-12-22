@@ -1,13 +1,15 @@
 <!--
 Sync Impact Report:
-- Version change: 0.0.0 → 1.0.0
-- List of modified principles: Initial population of all principles.
-- Added sections: All sections are new.
+- Version change: 1.1.1 → 1.2.0
+- List of modified principles: Added UI/UX principles.
+- Added sections: UI/UX Principles, Design Quality Standards, Component Standards, Content Presentation Standards, Navigation Standards, Performance Standards, UI/UX Technical Constraints, UI/UX Scope, UI/UX Success Criteria, UI/UX Deliverables.
 - Removed sections: None.
 - Templates requiring updates:
-  - ✅ .specify/templates/plan-template.md
-  - ✅ .specify/templates/spec-template.md
-  - ✅ .specify/templates/tasks-template.md
+  - ⚠ .specify/templates/plan-template.md
+  - ⚠ .specify/templates/spec-template.md
+  - ⚠ .specify/templates/tasks-template.md
+  - ✅ .specify/templates/commands/*.md
+  - ⚠ README.md
 - Follow-up TODOs: None.
 -->
 
@@ -26,6 +28,22 @@ The content will be structured to guide learners from beginner to expert. Each m
 
 ### IV. Simulation-First Approach
 The primary learning environment is simulation. All projects and examples must be runnable in a simulated environment, with physical hardware being an optional extension.
+
+## UI/UX Principles
+### I. Professional technical documentation aesthetic
+The website must maintain a professional and polished appearance consistent with high-quality technical documentation.
+
+### II. Mobile-first responsive design
+The website must be designed and implemented with a mobile-first approach, ensuring optimal viewing and interaction across various screen sizes and devices.
+
+### III. Accessibility (WCAG 2.1 AA compliance)
+The website must adhere to WCAG 2.1 AA guidelines to ensure it is accessible to users with disabilities.
+
+### IV. Performance-focused (fast page loads)
+The website must prioritize performance, aiming for fast page loads and a smooth user experience.
+
+### V. Student-centric user experience
+The user experience must be tailored to the needs of students, facilitating easy navigation, clear content presentation, and engaging interactive elements.
 
 ## Key Standards
 
@@ -57,6 +75,40 @@ physical-ai-book/
 - Clear safety warnings must be provided before any instructions related to physical hardware deployment.
 - The project and its outputs must not be used for weaponization or surveillance applications.
 
+## Design Quality Standards
+- Consistent visual hierarchy across all pages
+- Clear typography (readability score 80+)
+- Robotics/AI themed color palette
+- Professional technical book appearance
+- Dark mode as default with light mode support
+
+## Component Standards
+- Reusable React components for common patterns
+- Custom MDX components for interactive elements
+- Consistent spacing and layout grid
+- Responsive breakpoints: mobile (375px), tablet (768px), desktop (1024px+)
+
+## Content Presentation Standards
+- Code blocks: syntax highlighting, copy button, line numbers
+- Admonitions: tip, warning, info, danger, note with custom icons
+- Learning objectives highlighted at chapter start
+- Progress indicators for module completion
+- Assessment quizzes with interactive UI
+
+## Navigation Standards
+- Clear sidebar hierarchy with module icons
+- Breadcrumbs for orientation
+- Next/Previous chapter navigation
+- Search functionality prominent
+- Mobile hamburger menu
+
+## Performance Standards
+- Page load < 2 seconds
+- Build time < 5 minutes
+- Lighthouse score > 90
+- Optimized images (WebP format)
+- Lazy loading for heavy content
+
 ## Technical Constraints
 
 - **ROS 2:** Humble Hawksbill (LTS)
@@ -65,6 +117,13 @@ physical-ai-book/
 - **Python:** 3.10+
 - **OS:** Ubuntu 22.04 LTS (Docker recommended for cross-platform compatibility)
 - **Hardware:** Minimum 16GB RAM and an NVIDIA GPU with at least 6GB VRAM.
+
+## UI/UX Technical Constraints
+- Docusaurus 3.x
+- React 18+
+- Tailwind CSS or vanilla CSS (custom theme)
+- No breaking changes to existing content
+- Must work with all 4 modules
 
 ## Book Structure
 
@@ -94,8 +153,32 @@ The book will be structured as follows, with approximate word counts:
   - Final Capstone Project
 - Each chapter: learning objectives, theory, code examples, exercises, summary
 
+## UI/UX Scope
+- Homepage/landing page design
+- Custom theme configuration
+- Module and chapter page layouts
+- Navigation improvements
+- Interactive UI components
+- Assessment quiz interfaces
+
+## UI/UX Success Criteria
+- Professional appearance comparable to top tech documentation sites
+- Students can navigate intuitively without training
+- All modules render consistently
+- Mobile experience equals desktop quality
+- Zero accessibility violations
+- Positive user feedback on readability
+
+## UI/UX Deliverables
+- Custom Docusaurus theme
+- Homepage with course overview
+- Enhanced module/chapter layouts
+- Reusable UI components
+- Style guide documentation
+- Deployment-ready build
+
 ## Governance
 
 This constitution is the single source of truth for all project principles and standards. All contributions, reviews, and decisions must align with it. Amendments require a documented proposal, review, and an update to the version number according to semantic versioning.
 
-**Version**: 1.1.1 | **Ratified**: 2025-12-21 | **Last Amended**: 2025-12-21
+**Version**: 1.2.0 | **Ratified**: 2025-12-21 | **Last Amended**: 2025-12-22
