@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="humanoid_sensors">
+
+    <!-- 
+      This URDF extends the base humanoid model to include a simulated LiDAR sensor.
+      It demonstrates how to integrate sensor definitions within the robot description.
+    -->
+
+    <!-- Include the base humanoid model -->
+    <xacro:include filename="$(find robotics_book_code)/module2-the-digital-twin/shared/humanoid_base.urdf.xacro" />
+
+    <!-- Define a new link for the LiDAR sensor -->
+    <link name="lidar_link">
+      <visual>
+        <geometry>
+          <cylinder radius="0.03" length="0.05"/>
+        </geometry>
+        <material name="black"/>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.03" length="0.05"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.1"/>
+        <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+      </inertial>
+    </link>
+
+    <!-- Attach the LiDAR to the head link -->
+    <joint name="head_to_lidar" type="fixed">
+      <parent link="head"/>
+      <child link="lidar_link"/>
+      <origin xyz="0 0 0.17" rpy="0 0 0"/> <!-- Positioned on top of the head -->
+    </joint>
+
+    <!-- Gazebo sensor plugin for LiDAR -->
+    <gazebo reference="lidar_link">
+      <sensor name="lidar_sensor" type="gpu_lidar">
+        <always_on>true</always_on>
+        <update_rate>10.0</update_rate>
+        <visualize>true</visualize>
+        <topic>lidar_scan</topic>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>640</samples>
+              <resolution>1</resolution>
+              <min_angle>-2.2</min_angle>
+              <max_angle>2.2</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>1</samples>
+              <resolution>1</resolution>
+              <min_angle>0</min_angle>
+              <max_angle>0</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>0.1</min>
+            <max>10.0</max>
+            <resolution>0.01</resolution>
+          </range>
+        </ray>
+        <plugin name="ignition::gazebo::sensors::GpuLidar" filename="ignition-gazebo-sensors">
+          <topic>lidar_scan</topic>
+          <frame_name>lidar_link</frame_name>
+        </plugin>
+      </sensor>
+    </gazebo>
+
+    <material name="black">
+      <color rgba="0 0 0 1"/>
+    </material>
+
+</robot>

@@ -1,0 +1,70 @@
+.admonition {
+  border-left: 4px solid;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 4px;
+}
+
+.admonitionHeading {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.admonitionIcon {
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.admonitionTitle {
+  font-weight: bold;
+}
+
+.admonitionTip .admonitionIcon {
+  color: #2ecc71; /* green */
+}
+
+.admonitionNote .admonitionIcon {
+  color: #3498db; /* blue */
+}
+
+.admonitionInfo .admonitionIcon {
+  color: #f1c40f; /* yellow */
+}
+
+.admonitionWarning .admonitionIcon {
+  color: #e67e22; /* orange */
+}
+
+.admonitionDanger .admonitionIcon {
+  color: #e74c3c; /* red */
+}
+
+.admonitionContent {
+  font-size: 1rem;
+}
+
+.admonitionTip {
+  border-color: #2ecc71; /* green */
+  background-color: rgba(46, 204, 113, 0.1);
+}
+
+.admonitionNote {
+  border-color: #3498db; /* blue */
+  background-color: rgba(52, 152, 219, 0.1);
+}
+
+.admonitionInfo {
+  border-color: #f1c40f; /* yellow */
+  background-color: rgba(241, 196, 15, 0.1);
+}
+
+.admonitionWarning {
+  border-color: #e67e22; /* orange */
+  background-color: rgba(230, 126, 34, 0.1);
+}
+
+.admonitionDanger {
+  border-color: #e74c3c; /* red */
+  background-color: rgba(231, 76, 60, 0.1);
+}

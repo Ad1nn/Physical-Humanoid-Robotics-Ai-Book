@@ -39,20 +39,26 @@ This Quickstart Guide is for developers who want to understand the foundational 
 The UI/UX enhancements are primarily implemented within the Docusaurus custom theme. Key files and directories include:
 
 -   `src/theme/`: Contains overridden Docusaurus components and custom layouts.
--   `src/css/custom.css`: For global styling and utility classes (e.g., if using vanilla CSS).
--   `src/components/`: Directory for custom React components used throughout the site.
+-   `src/css/custom.css`: For global styling and utility classes.
+-   `src/components/`: Directory for custom React components (e.g., `Admonition`, `LearningObjectives`, `ProgressBar`, `Quiz`, `LazyLoad`, `HeavyContent`). These can be imported using the `@components` alias.
 
 ## Contributing to UI/UX
 
 -   **Modifying existing elements**: Locate the relevant React component in `src/theme/` or `src/components/` and apply changes.
 -   **Adding new components**: Create new React components in `src/components/` and integrate them into relevant page layouts or MDX content.
--   **Styling**: Apply styling via `custom.css` or using a chosen CSS framework (e.g., Tailwind CSS) if configured.
+-   **Styling**: Apply styling via `custom.css`.
 
 ## Testing Your Changes
 
 -   **Local development**: Changes are live-reloaded during `npm start`.
--   **Component testing**: Run `npm test` (if Jest/React Testing Library is configured).
--   **End-to-end testing**: Run Playwright tests (if configured).
+-   **Component testing**: Run Jest tests for individual React components.
+    ```bash
+    npm test
+    ```
+-   **End-to-end testing**: Run Playwright tests for full user flows and UI interactions across different browsers and viewports.
+    ```bash
+    npx playwright test
+    ```
 
 ## Further Documentation
 

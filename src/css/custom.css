@@ -1,0 +1,114 @@
+/**
+ * Any CSS included here will be global.
+ * You can add any CSS code here that applies to the entire website.
+ */
+
+/* Robotics/AI Themed Color Palette */
+:root {
+  --ifm-color-primary: #007bff; /* A vibrant blue for primary actions/highlights */
+  --ifm-color-primary-dark: #0069d9;
+  --ifm-color-primary-darker: #0062cc;
+  --ifm-color-primary-darkest: #005cbf;
+  --ifm-color-primary-light: #288cff;
+  --ifm-color-primary-lighter: #429aff;
+  --ifm-color-primary-lightest: #6bb0ff;
+
+  --ifm-color-success: #28a745; /* Green for success */
+  --ifm-color-info: #17a2b8;    /* Cyan for info */
+  --ifm-color-warning: #ffc107; /* Yellow for warnings */
+  --ifm-color-danger: #dc3545;  /* Red for errors/danger */
+
+  --ifm-background-color: #f8f9fa; /* Light background */
+  --ifm-font-color-base: #212529; /* Dark text */
+  --ifm-heading-color: #343a40; /* Slightly darker headings */
+
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.05); /* Light code highlight */
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] {
+  --ifm-color-primary: #66b3ff; /* Lighter blue for dark mode primary */
+  --ifm-color-primary-dark: #4d94ff;
+  --ifm-color-primary-darker: #3385ff;
+  --ifm-color-primary-darkest: #0066ff;
+  --ifm-color-primary-light: #80c6ff;
+  --ifm-color-primary-lighter: #99d4ff;
+  --ifm-color-primary-lightest: #b3e0ff;
+
+  --ifm-color-success: #2ecc71; /* Green for success */
+  --ifm-color-info: #00bcd4;    /* Cyan for info */
+  --ifm-color-warning: #ffeb3b; /* Yellow for warnings */
+  --ifm-color-danger: #ef5350;  /* Red for errors/danger */
+
+  --ifm-background-color: #212529; /* Dark background */
+  --ifm-font-color-base: #f8f9fa; /* Light text */
+  --ifm-heading-color: #e9ecef; /* Slightly lighter headings */
+
+  --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.1); /* Dark mode code highlight */
+}
+
+/* Responsive breakpoints */
+:root {
+  --ifm-container-width: 1024px; /* Default for desktop */
+}
+
+@media screen and (max-width: 1023px) {
+  :root {
+    --ifm-container-width: 768px; /* Tablet breakpoint */
+  }
+}
+
+@media screen and (max-width: 767px) {
+  :root {
+    --ifm-container-width: 375px; /* Mobile breakpoint */
+  }
+}
+
+/* Base typography */
+:root {
+  --ifm-font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  --ifm-heading-font-family: var(--ifm-font-family-base);
+  --ifm-line-height-base: 1.6;
+  --ifm-paragraph-margin-bottom: 1rem;
+}
+
+body {
+  font-family: var(--ifm-font-family-base);
+  line-height: var(--ifm-line-height-base);
+  font-size: 16px; /* Default base font size */
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--ifm-heading-font-family);
+  line-height: 1.2;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.75rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1rem; }
+
+/* Adjust font sizes for better readability on different devices */
+@media screen and (max-width: 767px) {
+  body {
+    font-size: 14px; /* Smaller font size for mobile */
+  }
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.75rem; }
+  h3 { font-size: 1.5rem; }
+  h4 { font-size: 1.25rem; }
+  h5 { font-size: 1.1rem; }
+  h6 { font-size: 0.9rem; }
+}
+
+/* Example: Max width for content to prevent overly long lines on large screens */
+.main-wrapper {
+  max-width: var(--ifm-container-width);
+  margin: 0 auto;
+  padding: var(--ifm-spacing-md);
+}

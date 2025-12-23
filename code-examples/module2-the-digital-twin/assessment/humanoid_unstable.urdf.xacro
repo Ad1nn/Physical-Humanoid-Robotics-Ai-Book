@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="humanoid_unstable">
+
+    <!-- This URDF is intentionally designed to be unstable for Challenge 1. -->
+    <xacro:include filename="$(find robotics_book_code)/module2-the-digital-twin/shared/humanoid_base.urdf.xacro" />
+
+    <!-- Example of a small modification that could cause instability: -->
+    <!-- Lower the mass of the torso, making it top-heavy -->
+    <link name="torso">
+        <inertial>
+            <mass value="1.0"/> <!-- Significantly reduced mass -->
+            <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.005"/>
+        </inertial>
+    </link>
+
+</robot>

@@ -1,0 +1,87 @@
+---
+sidebar_position: 2
+---
+
+# ROS 2 Environment Setup Guide
+
+This guide will walk you through setting up your development environment for ROS 2 Humble Hawksbill on Ubuntu 22.04 LTS, with Python 3.10+. While direct installation on a native Ubuntu system is possible, we strongly recommend using Docker for a consistent and reproducible development environment across different operating systems.
+
+## Recommended: Docker Environment Setup
+
+Using Docker ensures that all students have the same environment, minimizing setup issues.
+
+1.  **Install Docker**: Follow the official Docker documentation for your operating system ([https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/)).
+2.  **Verify Docker Installation**:
+    ```bash
+    docker run hello-world
+    ```
+3.  **Clone the Repository**:
+    ```bash
+    git clone https://github.com/Ad1nn/Physical-Humanoid-Robotics-Ai-Book.git
+    cd Physical-Humanoid-Robotics-Ai-Book
+    ```
+4.  **Build the Docker Image**: Navigate to the `code-examples/module1-ros2-nervous-system/` directory and build the Docker image.
+    ```bash
+    cd code-examples/module1-ros2-nervous-system/
+    docker build -t ros2_humble_dev .
+    ```
+5.  **Run the Docker Container**:
+    ```bash
+    docker run -it --rm --name ros2_dev_container ros2_humble_dev bash
+    ```
+    This command will launch an interactive bash shell inside your ROS 2 development container.
+6.  **Verify ROS 2 Installation Inside Container**:
+    ```bash
+    source /opt/ros/humble/setup.bash
+    ros2 run demo_nodes_cpp talker
+    ros2 run demo_nodes_py listener
+    ```
+    You should see the talker and listener nodes communicating.
+
+## Alternative: Native Ubuntu 22.04 LTS Installation
+
+If you prefer a native installation (not recommended for beginners due to potential system conflicts):
+
+1.  **Set Locale**:
+    ```bash
+    sudo apt update && sudo apt install locales
+    sudo locale-gen en_US en_US.UTF-8
+    sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+    export LC_ALL=en_US.UTF-8
+    ```
+2.  **Setup Sources**:
+    ```bash
+    sudo apt install software-properties-common
+    sudo add-apt-repository universe
+    sudo apt update && sudo apt install curl -y
+    sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+    ```
+3.  **Install ROS 2 Packages**:
+    ```bash
+    sudo apt update
+    sudo apt install ros-humble-desktop
+    ```
+4.  **Environment Setup**:
+    ```bash
+    source /opt/ros/humble/setup.bash
+    ```
+5.  **Install `colcon` Build Tools**:
+    ```bash
+    sudo apt install python3-colcon-common-extensions
+    ```
+6.  **Verify Installation**:
+    ```bash
+    ros2 run demo_nodes_cpp talker
+    ros2 run demo_nodes_py listener
+    ```
+    You should see the talker and listener nodes communicating.
+
+## Python Environment
+
+ROS 2 Humble uses Python 3.10. Ensure your system's Python environment is correctly configured. You can use `pip` to install any additional Python packages required for specific code examples.
+
+```bash
+python3 --version # Should be 3.10.x
+pip install -r code-examples/module1-ros2-nervous-system/requirements.txt
+```

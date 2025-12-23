@@ -1,0 +1,213 @@
+/**
+ * CSS for the custom homepage.
+ */
+
+.heroBanner {
+  padding: 6rem 0; /* More vertical space for a grander feel */
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--ifm-background-color); /* Use background color for hero */
+  color: var(--ifm-font-color-base);
+}
+
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 3rem 0;
+  }
+}
+
+.hero__title {
+  color: var(--ifm-heading-color);
+  font-size: 4rem; /* Larger title */
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+}
+
+.hero__subtitle {
+  color: var(--ifm-font-color-base);
+  font-size: 2rem; /* Larger subtitle */
+  margin-bottom: 2rem;
+  font-weight: 300; /* Lighter weight for modern feel */
+}
+
+.heroDescription {
+  font-size: 1.25rem;
+  margin-bottom: 3rem; /* More space below description */
+  color: var(--ifm-font-color-base);
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.heroImage {
+  margin: 3rem 0; /* More space around image */
+}
+
+.heroImage img {
+  max-width: 350px; /* Slightly larger image */
+  height: auto;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2)); /* Subtle shadow for depth */
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.buttons .button {
+  margin: 0 0.75rem;
+  font-size: 1.1rem;
+  padding: 0.8rem 2rem;
+  border-radius: 8px; /* Slightly more rounded buttons */
+}
+
+.modules {
+  padding: 6rem 0; /* More vertical space */
+  background-color: var(--ifm-color-emphasis-100); /* Slightly different background for section contrast */
+  width: 100%;
+  max-width: var(--ifm-container-width);
+  margin: 0 auto;
+}
+
+.modules h2 {
+  text-align: center;
+  margin-bottom: 4rem; /* More space below heading */
+  font-size: 3rem;
+  color: var(--ifm-heading-color);
+}
+
+.moduleCard {
+  margin-bottom: 2.5rem; /* More space between cards */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.moduleCard:hover {
+  transform: translateY(-8px); /* More pronounced hover effect */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
+}
+
+.moduleCard .card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 10px; /* More rounded cards */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Clearer shadow */
+  border: none; /* Remove subtle border, rely on shadow */
+  background-color: var(--ifm-background-color);
+  overflow: hidden; /* Ensure rounded corners clip content */
+}
+
+.moduleCard .card__header {
+  background-color: transparent;
+  padding: 1.5rem 1.5rem 0.5rem; /* Adjust padding */
+}
+
+.moduleCard .card__header h3 {
+  font-size: 1.6rem; /* Larger card titles */
+  margin-bottom: 0.5rem;
+  color: var(--ifm-heading-color);
+  font-weight: 600; /* Bolder titles */
+}
+
+.moduleCard .card__header h3 .moduleIcon {
+  margin-right: 0.75rem; /* More space for icon */
+  font-size: 1.8rem;
+  vertical-align: middle;
+}
+
+.moduleCard .card__body {
+  padding: 0.5rem 1.5rem 1.5rem; /* Adjust padding */
+  color: var(--ifm-font-color-base);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.moduleCard .card__body p {
+  margin-bottom: 1rem;
+}
+
+.moduleCard .card__footer {
+  margin-top: auto;
+  padding: 1rem 1.5rem 1.5rem; /* Adjust padding */
+  background-color: transparent;
+}
+
+.moduleCard .button {
+  width: 100%;
+  max-width: 200px; /* Limit button width */
+  margin: 0 auto; /* Center button */
+  border-radius: 5px;
+  font-weight: 500;
+}
+
+.courseInfo {
+  background-color: var(--ifm-background-color);
+  padding: 6rem 0;
+  text-align: center;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.courseInfo h2 {
+  margin-bottom: 3rem;
+  color: var(--ifm-heading-color);
+  font-size: 2.5rem;
+}
+
+.courseInfo h3 {
+  color: var(--ifm-color-primary);
+  font-size: 1.6rem;
+  margin-bottom: 0.75rem;
+}
+
+.courseInfo p {
+  color: var(--ifm-font-color-base);
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.techStack {
+  padding: 6rem 0;
+  text-align: center;
+  background-color: var(--ifm-color-emphasis-100); /* Consistent with modules section */
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.techStack h2 {
+  margin-bottom: 3rem;
+  color: var(--ifm-heading-color);
+  font-size: 2.5rem;
+}
+
+.techBadge {
+  font-size: 1.1rem;
+  font-weight: 600; /* Bolder text */
+  margin-bottom: 1.5rem;
+  color: var(--ifm-font-color-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 1.5rem;
+  border-radius: 30px; /* Pill-shaped badges */
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background-color: var(--ifm-background-color);
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 220px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08); /* More prominent shadow */
+  transition: transform 0.2s ease;
+}
+
+.techBadge:hover {
+  transform: translateY(-3px);
+}
+
+.techBadge svg {
+  margin-right: 0.6rem;
+  font-size: 1.3rem;
+  vertical-align: middle;
+}

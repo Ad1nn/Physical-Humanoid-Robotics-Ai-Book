@@ -1,0 +1,302 @@
+---
+sidebar_position: 3
+---
+
+import LearningObjectives from '@components/LearningObjectives';
+
+<LearningObjectives>
+  <ul>
+    <li>Understand the core concepts of ROS 2 and its importance in robotics.</li>
+    <li>Differentiate between ROS 1 and ROS 2, and understand the benefits of the DDS middleware architecture.</li>
+    <li>Set up a ROS 2 workspace and create a simple "Hello World" node.</li>
+    <li>Implement a basic publisher/subscriber system in Python using `rclpy`.</li>
+  </ul>
+</LearningObjectives>
+
+# Chapter 1.1: ROS 2 Fundamentals
+
+## What is ROS 2 and why it exists?
+
+The Robot Operating System (ROS) is a flexible framework for writing robot software. It's a collection of tools, libraries, and conventions that aim to simplify the task of creating complex and robust robot behaviors across a wide variety of robotic platforms.
+
+ROS 2 is the successor to ROS 1, designed to address the limitations of ROS 1 in modern robotics applications. It focuses on features critical for real-world deployments, such as:
+
+*   **Real-time capabilities**: Improved performance for time-critical operations.
+*   **Support for multiple platforms**: Better compatibility with embedded systems, Windows, macOS, and different Linux distributions.
+*   **Security**: Enhanced communication security mechanisms.
+*   **Quality of Service (QoS)**: Fine-grained control over data reliability, latency, and throughput.
+*   **Scalability**: Designed for multi-robot systems and deployment in distributed environments.
+
+ROS 2 provides a standardized communication infrastructure, operating system-like services (e.g., hardware abstraction, package management, message passing), and development tools. It enables modular development, allowing different components of a robot (e.g., sensors, actuators, navigation, perception) to be developed independently and integrated seamlessly.
+
+## Why ROS 2 is essential for robotics:
+
+*   **Interoperability**: Allows different hardware and software components to work together.
+*   **Code Reusability**: Encourages the development of generic algorithms and drivers.
+*   **Rich Ecosystem**: Access to a vast collection of tools, libraries, and community support.
+*   **Standardization**: Provides a common language and framework for robotics development.
+*   **Abstraction**: Hides the complexities of low-level hardware communication.
+
+In essence, ROS 2 acts as the "nervous system" of a robot, connecting its "brain" (AI/ML algorithms) to its "body" (sensors and actuators).
+
+## ROS 2 vs ROS 1 Key Differences
+
+While sharing the same fundamental philosophy, ROS 2 introduces significant architectural changes and improvements over ROS 1:
+
+| Feature           | ROS 1                                  | ROS 2                                              |
+|-------------------|----------------------------------------|----------------------------------------------------|
+| **Middleware**    | ROS Master (centralized)               | DDS (Data Distribution Service) - decentralized      |
+| **Communication** | TCP/IP, UDP                            | DDS (TCP, UDP, shared memory, etc.) - pluggable    |
+| **Real-time**     | Best-effort, not real-time             | Hard real-time support (dependent on OS and DDS)   |
+| **Security**      | None by default                        | SROS 2 (Security in ROS 2) - authentication, encryption, access control |
+| **Multi-robot**   | Challenging, manual management         | Built-in support for distributed systems           |
+| **Platform**      | Primarily Linux                        | Linux, Windows, macOS, RTOS                        |
+| **QoS**           | Limited control                        | Extensive QoS policies (reliability, durability, etc.) |
+| **Client Libraries** | `roscpp`, `rospy`                   | `rclcpp`, `rclpy`, `rclc` (C)                     |
+| **Lifecycle**     | Nodes start immediately               | Managed node lifecycles (configurable states)      |
+| **Tools**         | `roscore`, `rosrun`, `roslaunch`      | `ros2 daemon`, `ros2 run`, `ros2 launch`           |
+
+The most significant change in ROS 2 is the shift from a centralized ROS Master to a **decentralized DDS (Data Distribution Service)** architecture. This eliminates single points of failure, improves real-time performance, and enhances scalability. DDS is an open international standard for data-centric publish/subscribe communication, bringing robust and flexible communication features to ROS 2.
+
+## DDS Middleware Architecture
+
+The Data Distribution Service (DDS) is the communication backbone of ROS 2. It's an open standard that enables real-time, peer-to-peer, and data-centric communication. Unlike ROS 1's client-server model with a central `roscore`, DDS allows ROS 2 nodes to discover each other and communicate directly without a central broker.
+
+### Key Characteristics of DDS:
+
+*   **Decentralized**: No single point of failure. Nodes communicate directly.
+*   **Data-Centric**: Communication is organized around the data itself, not the applications that produce or consume it. This means publishers and subscribers deal with topics (data streams), and the DDS middleware handles the delivery.
+*   **Quality of Service (QoS)**: DDS provides a rich set of QoS policies that allow developers to fine-tune communication parameters. These include:
+    *   **Reliability**: Guarantees delivery of messages.
+    *   **Durability**: Ensures messages are available even to late-joining subscribers.
+    *   **Liveliness**: Detects if publishers are still active.
+    *   **History**: Configures how many messages are kept for new subscribers.
+    *   **Deadline**: Sets a maximum expected period between messages.
+*   **Discovery**: Nodes automatically discover each other on the network without explicit configuration.
+*   **Pluggable**: ROS 2 supports different DDS implementations (e.g., Fast DDS, Cyclone DDS, RTI Connext), allowing users to choose the one best suited for their needs.
+
+### How DDS works in ROS 2:
+
+1.  **Nodes**: Each independent executable in ROS 2 is called a Node.
+2.  **Topics**: Nodes communicate by publishing data to topics and subscribing to topics.
+3.  **DDS Layer**: When a Node publishes data to a topic, the DDS middleware takes care of finding all interested subscribers to that topic and delivering the data according to the specified QoS policies.
+4.  **No Central Server**: Because DDS handles discovery and communication in a decentralized manner, ROS 2 doesn't require a central server like ROS 1's `roscore`. This makes ROS 2 deployments more robust and scalable.
+
+Understanding DDS is crucial for building efficient and reliable ROS 2 applications, especially when dealing with complex multi-robot systems or real-time constraints.
+
+## Installation and Workspace Setup
+
+Before you can start developing with ROS 2, you need to set up your environment. This typically involves installing ROS 2, configuring your shell, and creating a ROS 2 workspace where you will develop your packages.
+
+For a detailed, step-by-step guide on how to install ROS 2 Humble Hawksbill on Ubuntu 22.04 LTS and set up your development workspace, please refer to the [ROS 2 Environment Setup Guide](/prerequisites) documentation. We highly recommend using the Docker-based setup for consistency across different operating systems.
+
+## Your first "Hello World" ROS 2 Node
+
+Let's get started with a classic "Hello World" example in ROS 2 using `rclpy` (the Python client library). This will introduce you to the basic structure of a ROS 2 node and how to run it.
+
+A ROS 2 node is an executable program that performs a specific task. In this example, we'll create a simple node that prints "Hello World" to the console.
+
+### 1. Create a ROS 2 Package
+
+First, navigate to your ROS 2 workspace `src` directory (e.g., `~/ros_ws/src`) and create a new Python package:
+
+```bash
+ros2 pkg create --build-type ament_python my_first_ros2_package --dependencies rclpy
+```
+
+This command creates a new directory `my_first_ros2_package` with the basic structure for a Python ROS 2 package, and declares a dependency on `rclpy`.
+
+### 2. Write the Node Code
+
+Inside `my_first_ros2_package/my_first_ros2_package/`, create a Python file named `hello_world_node.py` with the following content:
+
+```python
+import rclpy
+from rclpy.node import Node
+
+class HelloWorldNode(Node):
+
+    def __init__(self):
+        super().__init__('hello_world_node')
+        self.get_logger().info('Hello World from ROS 2 Node!')
+
+def main(args=None):
+    rclpy.init(args=args) # Initialize the ROS 2 client library
+    node = HelloWorldNode() # Create the node
+    rclpy.spin_once(node) # Execute the node's callback functions once (for simple nodes)
+    node.destroy_node() # Destroy the node explicitly
+    rclpy.shutdown() # Shut down the ROS 2 client library
+
+if __name__ == '__main__':
+    main()
+```
+
+### 3. Update `setup.py`
+
+You need to tell ROS 2 about your executable script. Open `my_first_ros2_package/setup.py` and add the following inside the `entry_points` dictionary, under `'console_scripts'`:
+
+```python
+    entry_points={
+        'console_scripts': [
+            'hello_world = my_first_ros2_package.hello_world_node:main',
+        ],
+    },
+```
+
+### 4. Build the Package
+
+Navigate back to your workspace root (e.g., `~/ros_ws/`) and build your package:
+
+```bash
+colcon build --packages-select my_first_ros2_package
+```
+
+### 5. Source the Workspace
+
+After building, you need to source your workspace's `setup.bash` file so ROS 2 can find your new package:
+
+```bash
+source install/setup.bash
+```
+
+### 6. Run Your Node
+
+Now, you can run your first ROS 2 node:
+
+```bash
+ros2 run my_first_ros2_package hello_world
+```
+
+You should see the output:
+
+```
+[INFO] [hello_world_node]: Hello World from ROS 2 Node!
+```
+
+Congratulations! You've successfully created and run your first ROS 2 node.
+
+### Minimal Python Publisher/Subscriber Example
+
+Let's expand on the "Hello World" concept by creating a minimal Python publisher and subscriber using `rclpy`. This example demonstrates how two independent ROS 2 nodes can communicate by publishing messages to a topic and subscribing to that topic to receive messages.
+
+**Code Example**: `code-examples/module1-ros2-nervous-system/chapter1.1/minimal_pub_sub.py`
+
+```python
+import rclpy
+from rclpy.node import Node
+from std_msgs.msg import String
+from rclpy.executors import MultiThreadedExecutor # For running multiple nodes concurrently
+
+class MinimalPublisher(Node):
+    def __init__(self):
+        super().__init__('minimal_publisher')
+        self.publisher_ = self.create_publisher(String, 'topic', 10)
+        timer_period = 0.5  # seconds
+        self.timer = self.create_timer(timer_period, self.timer_callback)
+        self.i = 0
+
+    def timer_callback(self):
+        msg = String()
+        msg.data = 'Hello ROS 2: %d' % self.i
+        self.publisher_.publish(msg)
+        self.get_logger().info('Publishing: "%s"' % msg.data)
+        self.i += 1
+
+class MinimalSubscriber(Node):
+    def __init__(self):
+        super().__init__('minimal_subscriber')
+        self.subscription = self.create_subscription(
+            String,
+            'topic',
+            self.listener_callback,
+            10)
+        self.subscription  # prevent unused variable warning
+
+    def listener_callback(self, msg):
+        self.get_logger().info('Subscribing: "%s"' % msg.data)
+
+def main(args=None):
+    rclpy.init(args=args)
+
+    minimal_publisher = MinimalPublisher()
+    minimal_subscriber = MinimalSubscriber()
+
+    # Use a MultiThreadedExecutor to run both nodes concurrently
+    executor = MultiThreadedExecutor()
+    executor.add_node(minimal_publisher)
+    executor.add_node(minimal_subscriber)
+
+    try:
+        executor.spin() # Spin the executor to execute callbacks
+    except KeyboardInterrupt:
+        # Handle Ctrl+C gracefully
+        pass
+    finally:
+        # Clean up
+        minimal_publisher.destroy_node()
+        minimal_subscriber.destroy_node()
+        rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()
+```
+
+**Expected Terminal Output**:
+
+When you run this script, you should see continuous output in your terminal, with the publisher node printing "Publishing: 'Hello ROS 2: X'" and the subscriber node printing "Subscribing: 'Hello ROS 2: X'" for incrementing values of X.
+
+```
+[INFO] [minimal_publisher]: Publishing: "Hello ROS 2: 0"
+[INFO] [minimal_subscriber]: Subscribing: "Hello ROS 2: 0"
+[INFO] [minimal_publisher]: Publishing: "Hello ROS 2: 1"
+[INFO] [minimal_subscriber]: Subscribing: "Hello ROS 2: 1"
+... (continues until stopped with Ctrl+C)
+```
+
+**How to Run the Code**:
+
+1.  Navigate to your ROS 2 workspace (e.g., `~/ros_ws/`).
+2.  Ensure your workspace is sourced: `source install/setup.bash`.
+3.  Run the Python script directly:
+    ```bash
+    python3 code-examples/module1-ros2-nervous-system/chapter1.1/minimal_pub_sub.py
+    ```
+    Alternatively, if you create a package and add an entry point for this script (similar to the "Hello World" example), you could run it using `ros2 run <package_name> minimal_pub_sub`.
+
+### Debugging Tips:
+
+*   **Check for `ros2 topic echo /topic`**: In a separate terminal, after sourcing your workspace, run `ros2 topic echo /topic`. You should see the messages being published by the `minimal_publisher` node. If not, the publisher might not be running or correctly configured.
+*   **Check for `ros2 node list`**: Verify that both `minimal_publisher` and `minimal_subscriber` nodes are listed.
+*   **Ensure `rclpy` is installed**: If you encounter import errors, make sure your ROS 2 setup is complete and `rclpy` is accessible in your Python environment.
+*   **Permissions**: Ensure your Python script has execute permissions (`chmod +x minimal_pub_sub.py`).
+
+## Exercise: Create a Custom "Hello" Node
+
+Now it's your turn to create your own simple ROS 2 node!
+
+### Goal:
+Create a new ROS 2 Python node that:
+1.  Initializes with a unique node name (e.g., `my_custom_node`).
+2.  Logs a custom message (e.g., "Greetings from my custom ROS 2 node!").
+3.  Exits gracefully after logging the message once.
+
+### Steps:
+
+1.  **Create a new ROS 2 package**: Use `ros2 pkg create` to create a package named `custom_hello_package` with a dependency on `rclpy`.
+2.  **Write the node code**: Create a Python file (e.g., `custom_hello_node.py`) inside `custom_hello_package/custom_hello_package/` that implements the requirements.
+3.  **Update `setup.py`**: Add an entry point for your new node in `custom_hello_package/setup.py`.
+4.  **Build the package**: Navigate to your workspace root and run `colcon build --packages-select custom_hello_package`.
+5.  **Source your workspace**: `source install/setup.bash`.
+6.  **Run your custom node**: Use `ros2 run custom_hello_package custom_hello`.
+
+### Expected Output:
+
+You should see your custom message logged to the console, similar to:
+
+```
+[INFO] [my_custom_node]: Greetings from my custom ROS 2 node!
+```
+
+This exercise will solidify your understanding of creating, building, and running basic ROS 2 Python nodes.
+
+

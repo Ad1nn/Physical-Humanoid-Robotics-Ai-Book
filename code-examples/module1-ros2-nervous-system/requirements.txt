@@ -1,0 +1,15 @@
+# Python dependencies for Module 1 ROS 2 examples
+# ROS 2 Humble Hawksbill uses Python 3.10
+# rclpy is the ROS 2 Python client library, typically installed as part of ROS 2
+# For explicit dependency tracking, could add if needed for specific setup
+# Example:
+# rclpy # usually system installed
+# colcon-common-extensions # for workspace management
+
+# Minimal setup, assuming ROS 2 is sourced
+# Add specific packages if they are to be pip installed
+
+numpy==1.26.2
+opencv-python==4.9.0.80 # For image processing in camera_pipeline.py
+# cv_bridge is typically installed via ROS 2, but opencv-python is its underlying dependency
+

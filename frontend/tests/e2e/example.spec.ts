@@ -1,18 +1,20 @@
 import { test, expect } from '@playwright/test';
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+test.describe('Navigation', () => {
+  test('should have correct title on homepage', async ({ page }) => {
+    await page.goto('/');
+    await expect(page).toHaveTitle('Physical AI & Humanoid Robotics');
+  });
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
+  test('should navigate to Module 1 via sidebar', async ({ page }) => {
+    await page.goto('/');
+    // Click on the sidebar link for Module 1
+    await page.getByRole('link', { name: 'Module 1: The Robotic Nervous System (ROS 2)' }).click();
+    // Expect the URL to change to the module's index page
+    await expect(page).toHaveURL(/.*\/module-01-ros2$/);
+    // Expect the heading on the page to be visible
+    await expect(page.getByRole('heading', { name: 'Module 1: The Robotic Nervous System (ROS 2)' })).toBeVisible();
+  });
 
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
-
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
-
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+  // Add more navigation tests here as needed
 });

@@ -1,11 +1,11 @@
 module.exports = {
   testEnvironment: 'jsdom',
-  setupFilesAfterEnv: ['<rootDir>/setupTests.js'],
-  transform: {
-    '^.+\\.(js|jsx|ts|tsx)$': '<rootDir>/node_modules/babel-jest',
-  },
+  roots: ['<rootDir>/frontend/tests/component'],
   moduleNameMapper: {
-    '\\.(css|less|sass|scss)$': 'identity-obj-proxy',
-    '\\.(gif|ttf|eot|svg|png)$': '<rootDir>/__mocks__/fileMock.js',
+    '^@site/(.*)$': '<rootDir>/$1',
+    '\\.css$': '<rootDir>/__mocks__/fileMock.js',
+    '^@theme-original/(.*)$': '<rootDir>/__mocks__/fileMock.js',
+    '^@docusaurus/(.*)$': '<rootDir>/__mocks__/fileMock.js',
   },
+  setupFilesAfterEnv: ['<rootDir>/setupTests.js'],
 };
