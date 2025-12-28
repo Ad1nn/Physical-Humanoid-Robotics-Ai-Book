@@ -4,10 +4,10 @@
   "private": true,
   "description": "Physical Humanoid Robotics & AI Documentation",
   "scripts": {
-    "start": "docusaurus start",
-    "build": "docusaurus build",
-    "serve": "docusaurus serve",
-    "clear": "docusaurus clear"
+    "start": "npx docusaurus start",
+    "build": "npx docusaurus build",
+    "serve": "npx docusaurus serve",
+    "clear": "npx docusaurus clear"
   },
   "dependencies": {
     "@docusaurus/core": "^3.2.1",
