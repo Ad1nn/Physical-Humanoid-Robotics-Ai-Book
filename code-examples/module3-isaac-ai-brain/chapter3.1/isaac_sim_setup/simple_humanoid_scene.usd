@@ -1,0 +1,46 @@
+#usda 1.0
+(
+    defaultPrim = "World"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "World"
+{
+    def Xform "Environments"
+    {
+        # Example: Add a simple ground plane
+        def "GroundPlane" (
+            references = @/NVIDIA/Assets/Scenes/Templates/Basic/simple_room.usd@
+        )
+        {
+            float3 xformOp:scale = (1.0, 1.0, 1.0)
+            double3 xformOp:translate = (0.0, 0.0, 0.0)
+            double3 xformOp:rotate = (0.0, 0.0, 0.0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotate", "xformOp:scale"]
+        }
+    }
+
+    def Xform "Looks"
+    {
+    }
+
+    def Xform "Physics"
+    {
+    }
+
+    def Xform "Simulation"
+    {
+    }
+
+    def Xform "Robots"
+    {
+        def "Humanoid" (
+            references = @omniverse://localhost/NVIDIA/Assets/ISAAC/2023.1.1/Isaac/Robots/Humanoid/franka_humanoid_with_hands.usd@
+        )
+        {
+            double3 xformOp:translate = (0.0, 0.0, 0.8) # Lift the humanoid slightly above the ground
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+    }
+}

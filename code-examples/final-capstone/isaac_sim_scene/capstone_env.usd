@@ -1,0 +1,41 @@
+#usda 1.0
+(
+    defaultPrim = "World"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "World"
+{
+    def Xform "Environments"
+    {
+        # This is a placeholder for the Capstone Project's autonomous navigation environment.
+        # Students will create a detailed indoor environment here.
+        def "SmartHomeEnvironment" (
+            references = @/NVIDIA/Assets/Scenes/Templates/Basic/simple_room.usd@ # Example reference
+        )
+        {
+            float3 xformOp:scale = (1.0, 1.0, 1.0)
+            double3 xformOp:translate = (0.0, 0.0, 0.0)
+            double3 xformOp:rotate = (0.0, 0.0, 0.0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotate", "xformOp:scale"]
+        }
+
+        # Add multiple rooms, furniture, and dynamic obstacles as per project requirements.
+        # e.g., def Xform "Kitchen" { ... }
+        #       def Xform "Chair" { ... }
+    }
+
+    def Xform "Robots"
+    {
+        def "Humanoid" (
+            references = @omniverse://localhost/NVIDIA/Assets/ISAAC/2023.1.1/Isaac/Robots/Humanoid/franka_humanoid_with_hands.usd@
+        )
+        {
+            double3 xformOp:translate = (0.0, 0.0, 0.8)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+            # Ensure this humanoid is equipped with stereo cameras and LiDAR for the project
+            # (as configured in previous chapters or added here).
+        }
+    }
+}

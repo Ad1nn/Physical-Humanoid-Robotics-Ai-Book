@@ -1,0 +1,22 @@
+{
+  "questions": [
+    {
+      "question": "What is ROS 2?",
+      "options": [
+        { "text": "A new programming language", "isCorrect": false },
+        { "text": "A flexible framework for writing robot software", "isCorrect": true },
+        { "text": "An operating system for robots", "isCorrect": false },
+        { "text": "A type of robot", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "What is the main difference between ROS 1 and ROS 2?",
+      "options": [
+        { "text": "ROS 2 is only for Python", "isCorrect": false },
+        { "text": "ROS 2 uses a decentralized DDS architecture", "isCorrect": true },
+        { "text": "ROS 2 does not support Windows", "isCorrect": false },
+        { "text": "ROS 2 is not open source", "isCorrect": false }
+      ]
+    }
+  ]
+}

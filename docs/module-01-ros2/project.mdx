@@ -1,0 +1,156 @@
+---
+sidebar_position: 6
+---
+
+# Hands-on Project: Basic Humanoid Controller
+
+This project will provide a comprehensive hands-on experience, bridging the theoretical concepts with practical application in robot control.
+
+## Step-by-Step Implementation Guide
+
+Follow these steps to implement your Basic Humanoid Controller:
+
+### Step 1: Set up your Workspace and URDF
+
+1.  **Navigate to your workspace**: Ensure you are in your ROS 2 workspace (e.g., `~/ros_ws/`).
+2.  **Create a new package**: If you haven't already, create a new ROS 2 Python package for your project:
+    ```bash
+    ros2 pkg create --build-type ament_python humanoid_controller --dependencies rclpy sensor_msgs
+    ```
+3.  **Copy the URDF model**: Copy the `arm_robot.urdf.xacro` file (from `code-examples/module1-ros2-nervous-system/project/`) into your new `humanoid_controller/urdf/` directory. Create the `urdf` directory if it doesn't exist.
+4.  **Process and Visualize URDF**:
+    *   Navigate to your `humanoid_controller` package directory.
+    *   Process the Xacro file to a URDF file:
+        ```bash
+        ros2 run xacro xacro --inorder urdf/arm_robot.urdf.xacro > urdf/arm_robot.urdf
+        ```
+    *   Launch RViz2 to visualize your arm:
+        ```bash
+        source install/setup.bash # source your workspace
+        ros2 launch urdf_tutorial display.launch model:=urdf/arm_robot.urdf
+        ```
+        (You might need to install `urdf_tutorial`: `sudo apt install ros-humble-urdf-tutorial`)
+        In RViz2, add a "RobotModel" display and ensure the "Description Topic" is `/robot_description` and "Fixed Frame" is `base_link`. Use `joint_state_publisher_gui` to move the joints.
+
+### Step 2: Implement the Joint Command Publisher
+
+1.  **Create `joint_command_publisher.py`**:
+    Copy the `joint_command_publisher.py` file (from `code-examples/module1-ros2-nervous-system/project/`) into your `humanoid_controller/humanoid_controller/` directory.
+2.  **Modify `setup.py`**: Add an entry point for your `joint_command_publisher` node in `humanoid_controller/setup.py`:
+    ```python
+        'console_scripts': [
+            'joint_publisher = humanoid_controller.joint_command_publisher:main',
+        ],
+    ```
+3.  **Build and Run**:
+    *   Build your `humanoid_controller` package: `colcon build --packages-select humanoid_controller`.
+    *   Source your workspace: `source install/setup.bash`.
+    *   Run the publisher node: `ros2 run humanoid_controller joint_publisher`.
+    *   Verify with `ros2 topic echo /joint_states`.
+
+### Step 3: Implement the Sensor Feedback Subscriber
+
+1.  **Create `sensor_feedback_subscriber.py`**:
+    Copy the `sensor_feedback_subscriber.py` file (from `code-examples/module1-ros2-nervous-system/project/`) into your `humanoid_controller/humanoid_controller/` directory.
+2.  **Modify `setup.py`**: Add an entry point for your `sensor_feedback_subscriber` node in `humanoid_controller/setup.py`:
+    ```python
+        'console_scripts': [
+            'feedback_subscriber = humanoid_controller.sensor_feedback_subscriber:main',
+        ],
+    ```
+3.  **Build and Run**:
+    *   Build your package (if you made changes to `setup.py`).
+    *   Source your workspace.
+    *   Run the subscriber node in a separate terminal while the `joint_publisher` is running: `ros2 run humanoid_controller feedback_subscriber`.
+    *   Observe the feedback in the terminal.
+
+### Step 4: Implement the Arm Pose Service
+
+1.  **Define a custom service message**:
+    *   Create a `srv` directory inside your `humanoid_controller` package.
+    *   Create a file `SetArmPose.srv` inside `humanoid_controller/srv/` with the following content:
+        ```
+        string pose_name
+        ---
+        bool success
+        string message
+        ```
+    *   Modify `humanoid_controller/package.xml` to add:
+        ```xml
+        <build_depend>rosidl_default_generators</build_depend>
+        <member_of_group>rosidl_interface_packages</member_of_group>
+        ```
+        And in `humanoid_controller/CMakeLists.txt` add:
+        ```cmake
+        find_package(rosidl_default_generators REQUIRED)
+        rosidl_generate_interfaces(${PROJECT_NAME} "srv/SetArmPose.srv")
+        ```
+        And add a dependency to `package.xml`:
+        ```xml
+        <depend>example_interfaces</depend>
+        ```
+        (This will require rebuilding your workspace: `colcon build --packages-select humanoid_controller`)
+2.  **Create `arm_pose_service.py`**:
+    Copy the `arm_pose_service.py` file (from `code-examples/module1-ros2-nervous-system/project/`) into your `humanoid_controller/humanoid_controller/` directory. You will need to modify it to use your custom `SetArmPose` service type instead of `example_interfaces.srv.Trigger`.
+    *   Change `from example_interfaces.srv import Trigger` to `from humanoid_controller_interfaces.srv import SetArmPose`.
+    *   Change `self.srv = self.create_service(Trigger, 'set_arm_pose', self.set_arm_pose_callback)` to `self.srv = self.create_service(SetArmPose, 'set_arm_pose', self.set_arm_pose_callback)`.
+    *   Access `request.pose_name` instead of `request.message`.
+3.  **Modify `setup.py`**: Add an entry point for your `arm_pose_service` node.
+    ```python
+        'console_scripts': [
+            'pose_service = humanoid_controller.arm_pose_service:main',
+        ],
+    ```
+4.  **Build and Run**:
+    *   Build your package (`colcon build --packages-select humanoid_controller`).
+    *   Source your workspace.
+    *   Run the service node: `ros2 run humanoid_controller pose_service`.
+    *   Call the service from the command line: `ros2 service call /set_arm_pose humanoid_controller_interfaces/srv/SetArmPose "{pose_name: 'wave'}"`.
+    *   Observe the arm movement in RViz2 (if `joint_state_publisher` is running and publishing to `/joint_states`).
+
+## Testing and Validation Checklist
+
+Use this checklist to verify the correct functionality of your Basic Humanoid Controller project.
+
+- [ ] **URDF Model**:
+  - [ ] Does `arm_robot.urdf.xacro` process correctly to `arm_robot.urdf`?
+  - [ ] Does the arm model visualize correctly in RViz2 without errors?
+  - [ ] Can all 6 DOF joints be moved using `joint_state_publisher_gui`?
+- [ ] **Joint Command Publisher**:
+  - [ ] Does `joint_command_publisher.py` publish messages to `/joint_states` topic?
+  - [ ] Is the frequency of publishing appropriate (e.g., 10 Hz)?
+  - [ ] Does RViz2 respond to the published joint states (if `joint_state_publisher` is not running and your publisher directly controls the visualization)?
+- [ ] **Sensor Feedback Subscriber**:
+  - [ ] Does `sensor_feedback_subscriber.py` correctly subscribe to `/joint_states`?
+  - [ ] Does it log the received joint positions accurately?
+  - [ ] Can it process incoming data without errors?
+- [ ] **Arm Pose Service**:
+  - [ ] Is the `set_arm_pose` service registered and discoverable via `ros2 service list`?
+  - [ ] Can you successfully call the service from the command line (e.g., `ros2 service call /set_arm_pose humanoid_controller_interfaces/srv/SetArmPose "{pose_name: 'wave'}"`)?
+  - [ ] Does the arm move to the "wave" pose when the service is called?
+  - [ ] Does the arm move to other defined poses ("point", "rest") when their respective services are called?
+  - [ ] Does the service correctly report failure for undefined pose names?
+- [ ] **Integrated System**:
+  - [ ] Can all nodes (publisher, subscriber, service server, and potentially `joint_state_publisher_gui` for control/RViz) run concurrently without conflict?
+  - [ ] Does the system operate stably over time?
+
+## Expected Outcomes and Success Criteria
+
+Upon successful completion of this project, you should be able to:
+
+### Expected Outcomes:
+1.  **Functional ROS 2 Nodes**: You will have implemented three ROS 2 Python nodes: a joint command publisher, a joint state subscriber, and an arm pose service.
+2.  **Simulated Arm Control**: Your system will be able to command and observe the movement of a simulated 6 DOF robotic arm in RViz2.
+3.  **Service-Based Pose Control**: You will have a service that can trigger predefined arm poses, demonstrating event-driven control.
+4.  **Integrated System**: All components (URDF, publisher, subscriber, service) will work together harmoniously, demonstrating a complete ROS 2 robotics application.
+
+### Success Criteria:
+*   **URDF Visualization**: The `arm_robot.urdf.xacro` model must load and display correctly in RViz2.
+*   **Joint Movement**: The simulated arm joints must move smoothly and correctly when commanded by your publisher node or pose service.
+*   **Communication Verification**: Messages published by your joint command publisher must be observable via `ros2 topic echo /joint_states` and received by your sensor feedback subscriber.
+*   **Service Functionality**: Calls to your `set_arm_pose` service must trigger the correct arm movements for predefined poses and return appropriate responses.
+*   **Error Handling**: Your nodes should handle basic operational scenarios without crashing.
+*   **Code Quality**: Your Python code should be readable, well-commented, and adhere to basic Python best practices.
+
+
+

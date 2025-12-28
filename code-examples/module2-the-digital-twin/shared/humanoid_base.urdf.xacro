@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="humanoid_base">
+
+  <!-- Constants -->
+  <xacro:property name="PI" value="3.1415926535897931"/>
+  <xacro:property name="torso_len" value="0.6"/>
+  <xacro:property name="torso_rad" value="0.15"/>
+  <xacro:property name="head_rad" value="0.12"/>
+  <xacro:property name="leg_len" value="0.8"/>
+  <xacro:property name="leg_rad" value="0.08"/>
+  <xacro:property name="arm_len" value="0.5"/>
+  <xacro:property name="arm_rad" value="0.06"/>
+  <xacro:property name="foot_len" value="0.2"/>
+  <xacro:property name="foot_rad" value="0.1"/>
+
+  <!-- Materials -->
+  <material name="grey">
+    <color rgba="0.5 0.5 0.5 1"/>
+  </material>
+  <material name="blue">
+    <color rgba="0.1 0.1 0.8 1"/>
+  </material>
+  <material name="white">
+    <color rgba="1.0 1.0 1.0 1"/>
+  </material>
+
+  <!-- Base Link -->
+  <link name="base_link"/>
+
+  <!-- Torso -->
+  <link name="torso">
+    <visual>
+      <geometry>
+        <cylinder length="${torso_len}" radius="${torso_rad}"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="${torso_len}" radius="${torso_rad}"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="10"/>
+      <inertia ixx="1.0" ixy="0" ixz="0" iyy="1.0" iyz="0" izz="0.5"/>
+    </inertial>
+  </link>
+  <joint name="base_to_torso" type="fixed">
+    <parent link="base_link"/>
+    <child link="torso"/>
+    <origin xyz="0 0 ${leg_len + torso_len/2}" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Head -->
+  <link name="head">
+    <visual>
+      <geometry>
+        <sphere radius="${head_rad}"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="${head_rad}"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="2"/>
+      <inertia ixx="0.1" ixy="0" ixz="0" iyy="0.1" iyz="0" izz="0.1"/>
+    </inertial>
+  </link>
+  <joint name="torso_to_head" type="revolute">
+    <parent link="torso"/>
+    <child link="head"/>
+    <origin xyz="0 0 ${torso_len/2 + head_rad}" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-${PI/2}" upper="${PI/2}" effort="10" velocity="1.0"/>
+  </joint>
+
+  <!-- Macro for a leg -->
+  <xacro:macro name="leg" params="prefix side">
+    <link name="${prefix}_${side}_leg">
+      <visual>
+        <geometry>
+          <cylinder length="${leg_len}" radius="${leg_rad}"/>
+        </geometry>
+        <material name="grey"/>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder length="${leg_len}" radius="${leg_rad}"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="5"/>
+        <inertia ixx="0.5" ixy="0" ixz="0" iyy="0.5" iyz="0" izz="0.2"/>
+      </inertial>
+    </link>
+    <joint name="torso_to_${prefix}_${side}_leg" type="revolute">
+      <parent link="torso"/>
+      <child link="${prefix}_${side}_leg"/>
+      <origin xyz="0 ${side*(torso_rad)} -${torso_len/2}" rpy="0 0 0"/>
+      <axis xyz="1 0 0"/>
+      <limit lower="-${PI/2}" upper="${PI/2}" effort="100" velocity="1.0"/>
+    </joint>
+  </xacro:macro>
+
+  <!-- Macro for an arm -->
+  <xacro:macro name="arm" params="prefix side">
+    <link name="${prefix}_${side}_arm">
+      <visual>
+        <geometry>
+          <cylinder length="${arm_len}" radius="${arm_rad}"/>
+        </geometry>
+        <material name="grey"/>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder length="${arm_len}" radius="${arm_rad}"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="3"/>
+        <inertia ixx="0.3" ixy="0" ixz="0" iyy="0.3" iyz="0" izz="0.1"/>
+      </inertial>
+    </link>
+    <joint name="torso_to_${prefix}_${side}_arm" type="revolute">
+      <parent link="torso"/>
+      <child link="${prefix}_${side}_arm"/>
+      <origin xyz="0 ${side*(torso_rad + arm_rad)} ${torso_len/2 - arm_rad}" rpy="0 0 0"/>
+      <axis xyz="1 0 0"/>
+      <limit lower="-${PI}" upper="${PI}" effort="50" velocity="1.0"/>
+    </joint>
+  </xacro:macro>
+
+  <!-- Instantiate legs and arms -->
+  <xacro:leg prefix="right" side="1"/>
+  <xacro:leg prefix="left" side="-1"/>
+  <xacro:arm prefix="right" side="1"/>
+  <xacro:arm prefix="left" side="-1"/>
+
+</robot>

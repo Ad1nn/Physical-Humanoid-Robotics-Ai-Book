@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="humanoid_ch2.1">
+
+    <!-- 
+      This file represents the robot model for Chapter 2.1.
+      It includes the base definition of the humanoid robot.
+      For this chapter, we are not adding any new components,
+      so we just include the shared base model.
+    -->
+
+    <xacro:include filename="$(find robotics_book_code)/module2-the-digital-twin/shared/humanoid_base.urdf.xacro" />
+
+    <!-- In later chapters, we might add more sensors or components here -->
+
+</robot>

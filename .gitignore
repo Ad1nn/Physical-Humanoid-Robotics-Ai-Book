@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+.mypy_cache/
+.pytest_cache/
+.vscode/
+dist/
+*.egg-info/
+
+# Node.js / Docusaurus
+node_modules/
+build/
+.docusaurus/
+.cache/
+*.log
+dist/
+.env*
+
+# ROS 2
+install/
+log/
+build/
+
+# General
+.DS_Store
+Thumbs.db
+*.swp
+*.bak
+*.tmp
+.vscode/
+.idea/
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/

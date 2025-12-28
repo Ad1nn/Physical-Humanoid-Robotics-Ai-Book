@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+/**
+ * Any CSS included here will be global.
+ * You can add any CSS code here that applies to the entire website.
+ */
+
+/* Robotics/AI Themed Color Palette */
+:root {
+  --ifm-color-primary: #007BFF; /* A slightly desaturated but still vibrant blue for light mode primary */
+  --ifm-color-primary-dark: #0069D9;
+  --ifm-color-primary-darker: #0062CC;
+  --ifm-color-primary-darkest: #005CBF;
+  --ifm-color-primary-light: #288CFF;
+  --ifm-color-primary-lighter: #429AFF;
+  --ifm-color-primary-lightest: #6BB0FF;
+
+  --ifm-color-success: #28A745; /* Green for success (retained) */
+  --ifm-color-info: #17A2B8;    /* Cyan for info (retained) */
+  --ifm-color-warning: #FFC107; /* Yellow for warnings (retained) */
+  --ifm-color-danger: #DC3545;  /* Red for errors/danger (retained) */
+
+  --ifm-background-color: #F0F2F5; /* Very light gray background */
+  --ifm-font-color-base: #333333; /* Dark gray text */
+  --ifm-heading-color: #1A1A1A; /* Darker gray headings */
+
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.05); /* Light code highlight */
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] {
+  --ifm-color-primary: #00FFFF; /* Electric Cyan for dark mode primary */
+  --ifm-color-primary-dark: #00C2C2;
+  --ifm-color-primary-darker: #009999;
+  --ifm-color-primary-darkest: #006666;
+  --ifm-color-primary-light: #33FFFF;
+  --ifm-color-primary-lighter: #66FFFF;
+  --ifm-color-primary-lightest: #99FFFF;
+
+  --ifm-color-success: #39FF14; /* Neon Green for success */
+  --ifm-color-info: #BF00FF;    /* Vibrant Purple for info */
+  --ifm-color-warning: #FFEB3B; /* Yellow for warnings (retained) */
+  --ifm-color-danger: #EF5350;  /* Red for errors/danger (retained) */
+
+  --ifm-background-color: #0D0D0D; /* Deep black background */
+  --ifm-font-color-base: #E0E0E0; /* Slightly muted white text */
+  --ifm-heading-color: #FFFFFF; /* Bright white headings */
+
+  --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.1); /* Dark mode code highlight */
+}
+
+/* Responsive breakpoints */
+:root {
+  --ifm-container-width: 1024px; /* Default for desktop */
+}
+
+@media screen and (max-width: 1023px) {
+  :root {
+    --ifm-container-width: 768px; /* Tablet breakpoint */
+  }
+}
+
+@media screen and (max-width: 767px) {
+  :root {
+    --ifm-container-width: 375px; /* Mobile breakpoint */
+  }
+}
+
+/* Base typography */
+:root {
+  --ifm-font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  --ifm-heading-font-family: 'Rajdhani', sans-serif; /* Futuristic font for headings */
+  --ifm-line-height-base: 1.6;
+  --ifm-paragraph-margin-bottom: 1rem;
+}
+
+body {
+  font-family: var(--ifm-font-family-base);
+  line-height: var(--ifm-line-height-base);
+  font-size: 16px; /* Default base font size */
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--ifm-heading-font-family);
+  line-height: 1.2;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.05em; /* Slightly wider letter-spacing for futuristic feel */
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.75rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1rem; }
+
+/* Adjust font sizes for better readability on different devices */
+@media screen and (max-width: 767px) {
+  body {
+    font-size: 14px; /* Smaller font size for mobile */
+  }
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.75rem; }
+  h3 { font-size: 1.5rem; }
+  h4 { font-size: 1.25rem; }
+  h5 { font-size: 1.1rem; }
+  h6 { font-size: 0.9rem; }
+}

@@ -1,0 +1,117 @@
+### Page state
+- Page URL: http://localhost:3000/Physical-Humanoid-Robotics-Ai-Book/
+- Page Title: Hello from Physical AI & Humanoid Robotics | Physical AI & Humanoid Robotics
+- Page Snapshot:
+```yaml
+- generic [ref=e2]:
+  - region "Skip to main content":
+    - link "Skip to main content" [ref=e3] [cursor=pointer]:
+      - /url: "#__docusaurus_skipToContent_fallback"
+  - navigation "Main" [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - link "Physical AI & Humanoid Robotics Logo Physical AI & Humanoid Robotics" [ref=e7] [cursor=pointer]:
+          - /url: /Physical-Humanoid-Robotics-Ai-Book/
+          - img "Physical AI & Humanoid Robotics Logo" [ref=e9]
+          - generic [ref=e10]: Physical AI & Humanoid Robotics
+        - link "Documentation" [ref=e11] [cursor=pointer]:
+          - /url: /Physical-Humanoid-Robotics-Ai-Book/intro
+      - generic [ref=e12]:
+        - link "GitHub(opens in new tab)" [ref=e13] [cursor=pointer]:
+          - /url: https://github.com/Ad1nn/Physical-Humanoid-Robotics-Ai-Book
+          - text: GitHub
+          - img "(opens in new tab)" [ref=e14]
+        - button "Switch between dark and light mode (currently dark mode)" [ref=e17] [cursor=pointer]:
+          - img [ref=e18]
+  - generic [ref=e20]:
+    - banner [ref=e21]:
+      - generic [ref=e22]:
+        - heading "Physical AI & Humanoid Robotics" [level=1] [ref=e23]
+        - paragraph [ref=e24]: From Digital Brain to Physical Body
+        - paragraph [ref=e25]: Learn to build autonomous humanoid robots using ROS 2, simulation, and AI.
+        - img "Humanoid Robot" [ref=e27]
+        - link "Get Started" [ref=e29] [cursor=pointer]:
+          - /url: "#modules"
+    - main [ref=e30]:
+      - generic [ref=e33]:
+        - 'link "🤖 Module 1: The Robotic Nervous System (ROS 2) Understand the foundational middleware for robot control and communication. Start Module" [ref=e35] [cursor=pointer]':
+          - /url: /Physical-Humanoid-Robotics-Ai-Book/module-01-ros2
+          - generic [ref=e36]:
+            - 'heading "🤖 Module 1: The Robotic Nervous System (ROS 2)" [level=3] [ref=e38]'
+            - paragraph [ref=e40]: Understand the foundational middleware for robot control and communication.
+            - button "Start Module" [ref=e42]
+        - 'link "🎮 Module 2: The Digital Twin (Gazebo & Unity) Create high-fidelity virtual replicas of robots and environments for simulation. Start Module" [ref=e44] [cursor=pointer]':
+          - /url: /Physical-Humanoid-Robotics-Ai-Book/module-02-simulation
+          - generic [ref=e45]:
+            - 'heading "🎮 Module 2: The Digital Twin (Gazebo & Unity)" [level=3] [ref=e47]'
+            - paragraph [ref=e49]: Create high-fidelity virtual replicas of robots and environments for simulation.
+            - button "Start Module" [ref=e51]
+        - 'link "🧠 Module 3: The AI-Robot Brain (NVIDIA Isaac) Leverage advanced simulation platforms for synthetic data generation and reinforcement learning. Start Module" [ref=e53] [cursor=pointer]':
+          - /url: /Physical-Humanoid-Robotics-Ai-Book/module-03-isaac
+          - generic [ref=e54]:
+            - 'heading "🧠 Module 3: The AI-Robot Brain (NVIDIA Isaac)" [level=3] [ref=e56]'
+            - paragraph [ref=e58]: Leverage advanced simulation platforms for synthetic data generation and reinforcement learning.
+            - button "Start Module" [ref=e60]
+        - 'link "💬 Module 4: Vision-Language-Action (VLA) Integrate state-of-the-art AI models for cognitive planning and autonomous decision-making. Start Module" [ref=e62] [cursor=pointer]':
+          - /url: /Physical-Humanoid-Robotics-Ai-Book/module-04-vla
+          - generic [ref=e63]:
+            - 'heading "💬 Module 4: Vision-Language-Action (VLA)" [level=3] [ref=e65]'
+            - paragraph [ref=e67]: Integrate state-of-the-art AI models for cognitive planning and autonomous decision-making.
+            - button "Start Module" [ref=e69]
+      - generic [ref=e71]:
+        - heading "Course at a Glance" [level=2] [ref=e72]
+        - generic [ref=e73]:
+          - generic [ref=e74]:
+            - heading "Duration" [level=3] [ref=e75]
+            - paragraph [ref=e76]: 8-12 weeks (self-paced)
+          - generic [ref=e77]:
+            - heading "Format" [level=3] [ref=e78]
+            - paragraph [ref=e79]: 4 modules, 12 chapters, hands-on projects
+          - generic [ref=e80]:
+            - heading "Prerequisites" [level=3] [ref=e81]
+            - paragraph [ref=e82]: Python, AI/ML basics, Linux terminal
+      - generic [ref=e84]:
+        - heading "What You'll Use" [level=2] [ref=e85]
+        - generic [ref=e86]:
+          - generic [ref=e87]: 🤖 ROS 2 Humble
+          - generic [ref=e88]: 🐍 Python 3.10+
+          - generic [ref=e89]: ⚙️ Gazebo
+          - generic [ref=e90]: ✨ Unity
+          - generic [ref=e91]: 🚀 NVIDIA Isaac Sim
+  - contentinfo [ref=e92]:
+    - generic [ref=e93]:
+      - generic [ref=e94]:
+        - generic [ref=e95]:
+          - generic [ref=e96]: Docs
+          - list [ref=e97]:
+            - listitem [ref=e98]:
+              - 'link "Module 1: ROS 2" [ref=e99] [cursor=pointer]':
+                - /url: /Physical-Humanoid-Robotics-Ai-Book/module-01-ros2
+        - generic [ref=e100]:
+          - generic [ref=e101]: Community
+          - list [ref=e102]:
+            - listitem [ref=e103]:
+              - link "Stack Overflow(opens in new tab)" [ref=e104] [cursor=pointer]:
+                - /url: https://stackoverflow.com/questions/tagged/docusaurus
+                - text: Stack Overflow
+                - img "(opens in new tab)" [ref=e105]
+            - listitem [ref=e107]:
+              - link "Discord(opens in new tab)" [ref=e108] [cursor=pointer]:
+                - /url: https://discordapp.com/invite/docusaurus
+                - text: Discord
+                - img "(opens in new tab)" [ref=e109]
+            - listitem [ref=e111]:
+              - link "Twitter(opens in new tab)" [ref=e112] [cursor=pointer]:
+                - /url: https://twitter.com/docusaurus
+                - text: Twitter
+                - img "(opens in new tab)" [ref=e113]
+        - generic [ref=e115]:
+          - generic [ref=e116]: More
+          - list [ref=e117]:
+            - listitem [ref=e118]:
+              - link "GitHub(opens in new tab)" [ref=e119] [cursor=pointer]:
+                - /url: https://github.com/Ad1nn/Physical-Humanoid-Robotics-Ai-Book
+                - text: GitHub
+                - img "(opens in new tab)" [ref=e120]
+      - generic [ref=e123]: Copyright © 2025 Ad1nn, Inc. Built with Docusaurus.
+```

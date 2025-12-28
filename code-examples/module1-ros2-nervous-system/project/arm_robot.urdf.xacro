@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<robot name="arm_robot" xmlns:xacro="http://ros.org/xacro">
+
+  <!-- Common Properties and Materials -->
+  <xacro:property name="PI" value="3.14159265359" />
+
+  <material name="black"><color rgba="0 0 0 1"/></material>
+  <material name="white"><color rgba="1 1 1 1"/></material>
+  <material name="red"><color rgba="0.8 0 0 1"/></material>
+  <material name="green"><color rgba="0 0.8 0 1"/></material>
+  <material name="blue"><color rgba="0 0 0.8 1"/></material>
+  <material name="grey"><color rgba="0.7 0.7 0.7 1"/></material>
+
+  <!-- Macro for common link properties (visual, collision, inertial) -->
+  <xacro:macro name="default_link_properties" params="mass ixx iyy izz *visual_geom *collision_geom *inertial_origin">
+    <inertial>
+      <origin xyz="${inertial_origin}" rpy="0 0 0"/>
+      <mass value="${mass}"/>
+      <inertia ixx="${ixx}" ixy="0" ixz="0" iyy="${iyy}" iyz="0" izz="${izz}"/>
+    </inertial>
+    <visual><xacro:insert_block name="visual_geom"/></visual>
+    <collision><xacro:insert_block name="collision_geom"/></collision>
+  </xacro:macro>
+
+  <!-- Base Link (fixed to world) -->
+  <link name="world"/>
+  <joint name="fixed_base_joint" type="fixed">
+    <parent link="world"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Base Link for the Arm (a small fixed pedestal) -->
+  <xacro:property name="pedestal_height" value="0.1"/>
+  <xacro:property name="pedestal_radius" value="0.05"/>
+  <link name="base_link">
+    <xacro:default_link_properties mass="1.0" ixx="0.001" iyy="0.001" izz="0.001" inertial_origin="0 0 ${pedestal_height/2}">
+      <visual_geom><geometry><cylinder radius="${pedestal_radius}" length="${pedestal_height}"/></geometry><material name="grey"/></visual_geom>
+      <collision_geom><geometry><cylinder radius="${pedestal_radius}" length="${pedestal_height}"/></geometry></collision_geom>
+    </xacro:default_link_properties>
+  </link>
+
+  <!-- Macro for Arm Segments -->
+  <xacro:macro name="arm_segment" params="prefix parent_link segment_length segment_radius segment_mass joint_type axis_xyz joint_lower joint_upper joint_effort joint_velocity origin_xyz origin_rpy">
+    <link name="${prefix}_link">
+      <xacro:default_link_properties mass="${segment_mass}" ixx="0.01" iyy="0.01" izz="0.01" inertial_origin="0 0 ${segment_length/2}">
+        <visual_geom><geometry><cylinder radius="${segment_radius}" length="${segment_length}"/></geometry><material name="green"/></visual_geom>
+        <collision_geom><geometry><cylinder radius="${segment_radius}" length="${segment_length}"/></geometry></collision_geom>
+      </xacro:default_link_properties>
+    </link>
+    <joint name="${prefix}_joint" type="${joint_type}">
+      <parent link="${parent_link}"/>
+      <child link="${prefix}_link"/>
+      <origin xyz="${origin_xyz}" rpy="${origin_rpy}"/>
+      <axis xyz="${axis_xyz}"/>
+      <limit lower="${joint_lower}" upper="${joint_upper}" effort="${joint_effort}" velocity="${joint_velocity}"/>
+    </joint>
+  </xacro:macro>
+
+  <!-- Arm Definition (6 DOF) -->
+
+  <!-- Joint 1: Shoulder Yaw (base_link to shoulder_yaw_link) -->
+  <xacro:arm_segment 
+    prefix="shoulder_yaw" 
+    parent_link="base_link" 
+    segment_length="0.05" segment_radius="0.05" segment_mass="0.5"
+    joint_type="revolute" axis_xyz="0 0 1" 
+    joint_lower="${-PI/2}" joint_upper="${PI/2}" joint_effort="10" joint_velocity="1"
+    origin_xyz="0 0 ${pedestal_height}" origin_rpy="0 0 0"
+  />
+
+  <!-- Joint 2: Shoulder Pitch (shoulder_yaw_link to shoulder_pitch_link) -->
+  <xacro:arm_segment 
+    prefix="shoulder_pitch" 
+    parent_link="shoulder_yaw_link" 
+    segment_length="0.1" segment_radius="0.04" segment_mass="0.5"
+    joint_type="revolute" axis_xyz="0 1 0" 
+    joint_lower="${-PI/2}" joint_upper="${PI/2}" joint_effort="10" joint_velocity="1"
+    origin_xyz="0 0 0.05" origin_rpy="0 0 0"
+  />
+
+  <!-- Joint 3: Shoulder Roll (shoulder_pitch_link to upper_arm_link) -->
+  <xacro:arm_segment 
+    prefix="shoulder_roll" 
+    parent_link="shoulder_pitch_link" 
+    segment_length="0.3" segment_radius="0.03" segment_mass="1.0"
+    joint_type="revolute" axis_xyz="1 0 0" 
+    joint_lower="${-PI/4}" joint_upper="${PI/4}" joint_effort="10" joint_velocity="1"
+    origin_xyz="0 0 0.15" origin_rpy="0 0 0"
+  />
+
+  <!-- Joint 4: Elbow Pitch (upper_arm_link to elbow_pitch_link) -->
+  <xacro:arm_segment 
+    prefix="elbow_pitch" 
+    parent_link="shoulder_roll_link" 
+    segment_length="0.25" segment_radius="0.03" segment_mass="0.8"
+    joint_type="revolute" axis_xyz="0 1 0" 
+    joint_lower="${-PI/2}" joint_upper="${PI/2}" joint_effort="8" joint_velocity="0.8"
+    origin_xyz="0 0 0.3" origin_rpy="0 0 0"
+  />
+
+  <!-- Joint 5: Wrist Pitch (elbow_pitch_link to wrist_pitch_link) -->
+  <xacro:arm_segment 
+    prefix="wrist_pitch" 
+    parent_link="elbow_pitch_link" 
+    segment_length="0.05" segment_radius="0.02" segment_mass="0.3"
+    joint_type="revolute" axis_xyz="0 1 0" 
+    joint_lower="${-PI/4}" joint_upper="${PI/4}" joint_effort="5" joint_velocity="0.5"
+    origin_xyz="0 0 0.25" origin_rpy="0 0 0"
+  />
+
+  <!-- Joint 6: Wrist Roll (wrist_pitch_link to gripper_base_link) -->
+  <xacro:arm_segment 
+    prefix="wrist_roll" 
+    parent_link="wrist_pitch_link" 
+    segment_length="0.05" segment_radius="0.02" segment_mass="0.3"
+    joint_type="revolute" axis_xyz="1 0 0" 
+    joint_lower="${-PI/4}" joint_upper="${PI/4}" joint_effort="5" joint_velocity="0.5"
+    origin_xyz="0 0 0.05" origin_rpy="0 0 0"
+  />
+
+  <!-- End Effector/Gripper (simplified for this example) -->
+  <link name="gripper_base_link">
+    <xacro:default_link_properties mass="0.2" ixx="0.0001" iyy="0.0001" izz="0.0001" inertial_origin="0 0 0.025">
+      <visual_geom><geometry><box size="0.05 0.05 0.05"/></geometry><material name="red"/></visual_geom>
+      <collision_geom><geometry><box size="0.05 0.05 0.05"/></geometry></collision_geom>
+    </xacro:default_link_properties>
+  </link>
+  <joint name="wrist_to_gripper_fixed_joint" type="fixed">
+    <parent link="wrist_roll_link"/>
+    <child link="gripper_base_link"/>
+    <origin xyz="0 0 0.05" rpy="0 0 0"/>
+  </joint>
+
+</robot>

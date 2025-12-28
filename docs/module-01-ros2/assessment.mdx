@@ -1,0 +1,89 @@
+---
+sidebar_position: 7
+---
+
+# Module Assessment
+
+## Overview
+This assessment is designed to evaluate your understanding of the core concepts presented in Module 1: The Robotic Nervous System (ROS 2) and your ability to apply these concepts in practical coding scenarios. It comprises a set of multiple-choice questions to test your theoretical knowledge and practical coding challenges to assess your implementation skills.
+
+Successful completion of this assessment demonstrates your foundational competency in ROS 2, preparing you for more advanced topics in subsequent modules.
+
+## Multiple Choice Questions (MCQs)
+
+import Quiz from '@components/Quiz/Quiz';
+import quizData from '@site/src/data/quiz1.json';
+
+<Quiz questions={quizData.questions} />
+
+## Practical Coding Challenges
+
+These challenges require you to apply the concepts and skills learned in Module 1 to solve practical problems. You should aim to produce working ROS 2 code that demonstrates your understanding.
+
+### Challenge 1: Fix Broken Node Communication
+
+**Scenario**: You are given a ROS 2 package containing two Python nodes: a publisher (`broken_talker.py`) and a subscriber (`broken_listener.py`). The publisher is supposed to send "Hello" messages, and the subscriber is supposed to receive and print them. However, they are not communicating.
+
+**Task**: Identify and fix the issues preventing communication between `broken_talker.py` and `broken_listener.py`. The fix should involve ensuring they use the same topic name and message type, and potentially checking QoS settings if applicable.
+
+**Files provided**:
+*   `code-examples/module1-ros2-nervous-system/assessment/broken_talker.py`
+*   `code-examples/module1-ros2-nervous-system/assessment/broken_listener.py`
+
+### Challenge 2: Add a New Joint to URDF
+
+**Scenario**: You have a simplified URDF model of a robot arm. You need to extend its functionality by adding an additional rotational joint and a link.
+
+**Task**: Modify a provided `simple_arm.urdf.xacro` file to add an extra revolute joint and a new link (e.g., a "hand" or a "tool_mount") at the end of the existing arm. Ensure the new joint has appropriate limits and axis of rotation. Visualize your modified robot in RViz2 to confirm the addition.
+
+**Files provided**:
+*   `code-examples/module1-ros2-nervous-system/assessment/simple_arm.urdf.xacro`
+
+### Challenge 3: Implement a Custom Service
+
+**Scenario**: You need a way to remotely control a robot's LED light. You will implement a ROS 2 service that allows a client to request a specific color for the LED.
+
+**Task**: Create a new ROS 2 Python package and implement:
+1.  A custom service message type (e.g., `SetLEDColor.srv`) that takes a `string color` (e.g., "red", "green", "blue") as a request and returns a `bool success` and `string message` as a response.
+2.  A service server node (`led_controller_server.py`) that offers this `SetLEDColor` service. When called, it should log the requested color and simulate setting the LED (e.g., by printing a message "Setting LED to [color]").
+3.  A service client node (`led_controller_client.py`) that calls this service to set the LED color to "green".
+
+**Expected outcome**: The service client successfully calls the service, and the server logs the action and returns a successful response.
+
+## Assessment Rubric and Passing Criteria
+
+Your performance in this module's assessment will be evaluated based on the following rubric and passing criteria:
+
+### Multiple Choice Questions (MCQs)
+*   **Grading**: Each question is worth 10 points.
+*   **Passing Criteria**: A score of 70% (7 out of 10 questions correct) or higher is required to pass the MCQ section.
+
+### Practical Coding Challenges
+Each challenge will be graded based on:
+
+1.  **Correctness (50%)**:
+    *   **Challenge 1**: Nodes communicate correctly; identified issues are resolved.
+    *   **Challenge 2**: New joint and link are correctly added to the URDF; model visualizes without errors; joint limits and axis are appropriate.
+    *   **Challenge 3**: Custom service type is correctly defined; service server and client function as expected; communication is successful.
+2.  **Code Quality (30%)**:
+    *   Readability, clear comments, adherence to Python best practices (PEP 8 where applicable).
+    *   Proper use of ROS 2 `rclpy` constructs.
+3.  **Understanding (20%)**:
+    *   Demonstrated understanding of underlying ROS 2 concepts (e.g., topic names, message types, URDF structure, service definitions).
+    *   Ability to debug and troubleshoot issues.
+
+*   **Passing Criteria for Challenges**:
+    *   **Challenge 1**: Must demonstrate working communication between the nodes.
+    *   **Challenge 2**: The modified URDF must be valid and visualize correctly in RViz2, with the new joint movable.
+    *   **Challenge 3**: The custom service must be callable, and the server/client interaction must be successful.
+*   **Overall Passing Criteria for Practical Challenges**: Successful completion of at least 2 out of 3 challenges.
+
+### Overall Module Assessment Passing Criteria
+To successfully pass Module 1, you must:
+1.  Achieve at least 70% in the Multiple Choice Questions section.
+2.  Successfully complete at least 2 out of 3 Practical Coding Challenges.
+
+This rubric provides a clear framework for evaluating your mastery of Module 1's learning objectives.
+
+
+

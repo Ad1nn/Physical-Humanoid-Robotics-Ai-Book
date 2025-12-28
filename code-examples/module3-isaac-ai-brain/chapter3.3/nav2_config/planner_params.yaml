@@ -1,0 +1,49 @@
+planner_server:
+  ros__parameters:
+    use_sim_time: true
+    global_costmap_topic: /global_costmap/costmap_raw
+    local_costmap_topic: /local_costmap/costmap_raw
+    # Select desired global planners here
+    plugins: ["GridBased"] # Start with a simple global planner
+    GridBased:
+      plugin: "nav2_navfn_planner::NavfnPlanner"
+      tolerance: 0.25 # Goal tolerance
+      # SmacHybrid: # Example of an alternative global planner
+      #   plugin: "nav2_smac_planner::SmacPlannerHybrid"
+      #   cost_travel_multiplier: 1.0
+      #   downsample_costmap_ratio: 1
+
+controller_server:
+  ros__parameters:
+    use_sim_time: true
+    controller_frequency: 20.0 # How often to run the controller
+    progress_checker_plugin: "progress_checker"
+    goal_checker_plugin: "goal_checker"
+    # Select desired local controllers here
+    controller_plugins: ["FollowPath"] # Regulated Pure Pursuit is a good starting point
+    FollowPath:
+      plugin: "nav2_regulated_pure_pursuit_controller::RegulatedPurePursuitController"
+      desired_linear_vel: 0.5 # For a walking humanoid (adjust carefully)
+      min_speed_xy: 0.1
+      max_robot_pose_update_frequency: 50.0
+      lookahead_dist: 0.6
+      min_lookahead_dist: 0.3
+      max_lookahead_dist: 0.9
+      transform_tolerance: 0.1
+      max_allowed_time_to_collision: 1.0 # Avoid immediate collisions
+
+# You might want to add behavior tree configuration here if custom BTs are used
+bt_navigator:
+  ros__parameters:
+    use_sim_time: true
+    default_nav_to_pose_bt_xml: "package://nav2_bt_navigator/behavior_trees/navigate_to_pose_w_replanning_and_recovery.xml"
+
+recovery_server:
+  ros__parameters:
+    use_sim_time: true
+    recoveries: ["spin_recovery", "backup_recovery"] # Example recovery behaviors
+    spin_recovery:
+      plugin: "nav2_recoveries::SpinRecovery"
+    backup_recovery:
+      plugin: "nav2_recoveries::BackupRecovery"
+      backup_dist: 0.1 # Distance to backup in meters

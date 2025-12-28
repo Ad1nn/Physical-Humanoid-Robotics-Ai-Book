@@ -1,0 +1,41 @@
+#usda 1.0
+(
+    defaultPrim = "World"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "World"
+{
+    def Xform "Environments"
+    {
+        # This is a placeholder for the autonomous navigation project environment.
+        # Students will create a detailed indoor environment here.
+        def "IndoorEnvironment" (
+            references = @/NVIDIA/Assets/Scenes/Templates/Basic/simple_room.usd@ # Example reference
+        )
+        {
+            float3 xformOp:scale = (1.0, 1.0, 1.0)
+            double3 xformOp:translate = (0.0, 0.0, 0.0)
+            double3 xformOp:rotate = (0.0, 0.0, 0.0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotate", "xformOp:scale"]
+        }
+
+        # Add other static obstacles and features here for the project.
+        # e.g., def Xform "Table" { ... }
+    }
+
+    def Xform "Robots"
+    {
+        def "Humanoid" (
+            references = @omniverse://localhost/NVIDIA/Assets/ISAAC/2023.1.1/Isaac/Robots/Humanoid/franka_humanoid_with_hands.usd@
+        )
+        {
+            double3 xformOp:translate = (0.0, 0.0, 0.8)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+        
+        # Add a dynamic obstacle for testing (e.g., another robot or moving prim)
+        # def Xform "DynamicObstacle" { ... }
+    }
+}
