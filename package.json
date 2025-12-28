@@ -16,8 +16,8 @@
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.11.0",
-    "@docusaurus/core": "3.x",
-    "@docusaurus/preset-classic": "3.x",
+    "@docusaurus/core": "^3.9.2",
+    "@docusaurus/preset-classic": "^3.9.2",
     "@mdx-js/react": "^3.0.0",
     "axios": "^1.13.2",
     "better-auth": "^1.4.9",
