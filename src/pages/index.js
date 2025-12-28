@@ -1,82 +1,105 @@
 import React from 'react';
-import clsx from 'clsx';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { FaRobot, FaMicrochip, FaBookOpen, FaProjectDiagram } from 'react-icons/fa';
 import styles from './index.module.css';
 
+const modules = [
+  {
+    title: 'Module 1: The Robotic Nervous System',
+    icon: <FaRobot className={styles.moduleIcon} />,
+    description: 'An introduction to ROS 2, the communication backbone of modern robotics. Learn about nodes, topics, services, and building a basic robotic system.',
+    link: '/module-01-ros2',
+  },
+  {
+    title: 'Module 2: The Digital Twin',
+    icon: <FaMicrochip className={styles.moduleIcon} />,
+    description: 'Explore the world of simulation with Gazebo and Isaac Sim. Understand how to create digital replicas of robots and environments for testing and development.',
+    link: '/module-02-simulation',
+  },
+  {
+    title: 'Module 3: The AI Brain',
+    icon: <FaBookOpen className={styles.moduleIcon} />,
+    description: 'Dive into the core of robotic intelligence. This module covers perception, SLAM, and navigation using the Nav2 stack in Isaac Sim.',
+    link: '/module-03-isaac',
+  },
+  {
+    title: 'Module 4: Vision-Language-Action',
+    icon: <FaProjectDiagram className={styles.moduleIcon} />,
+    description: 'Discover how to connect large language models to robotic actions. Implement systems that can understand and respond to natural language commands.',
+    link: '/module-04-vla',
+  },
+];
+
 function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
+  const { siteConfig } = useDocusaurusContext();
   return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
+    <header className={styles.heroBanner}>
+      <div className={styles.heroGrid}></div>
       <div className="container">
-        <h1 className="hero__title">{siteConfig.title}</h1>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <p className={styles.heroDescription}>
-          Learn to build autonomous humanoid robots using ROS 2, simulation, and AI.
-        </p>
-        <div className={clsx('hero__img', styles.heroImage)}>
-            <img src="/img/humanoid-robot.png" alt="Humanoid Robot" />
-        </div>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="#modules">
-            Get Started
-          </Link>
+        <div className="row">
+          <div className="col col--8 col--offset-2">
+            <h1 className={styles.hero__title}>{siteConfig.title}</h1>
+            <p className={styles.hero__subtitle}>{siteConfig.tagline}</p>
+            <p className={styles.heroDescription}>
+              A technical book on AI systems operating in the physical world —
+              covering ROS 2, simulation, perception, planning, and
+              vision-language-action systems for humanoid robots.
+            </p>
+            <div className={styles.heroImage}>
+                          <img src="/img/humanoid-robot.svg" alt="Humanoid Robot" />
+            </div>
+            <div className={styles.buttons}>
+              <Link
+                className="button button--primary button--lg"
+                to="/intro"
+              >
+                Start Reading
+              </Link>
+              <Link
+                className="button button--secondary button--lg"
+                to="/module-01-ros2"
+              >
+                Browse Modules
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </header>
   );
 }
 
-function HomepageModules() {
-  const modules = [
-    {
-      title: 'Module 1: The Robotic Nervous System (ROS 2)',
-      icon: '🤖',
-      description: 'Understand the foundational middleware for robot control and communication.',
-      link: '/module-01-ros2',
-    },
-    {
-      title: 'Module 2: The Digital Twin (Gazebo & Unity)',
-      icon: '🎮',
-      description: 'Create high-fidelity virtual replicas of robots and environments for simulation.',
-      link: '/module-02-simulation',
-    },
-    {
-      title: 'Module 3: The AI-Robot Brain (NVIDIA Isaac)',
-      icon: '🧠',
-      description: 'Leverage advanced simulation platforms for synthetic data generation and reinforcement learning.',
-      link: '/module-03-isaac',
-    },
-    {
-      title: 'Module 4: Vision-Language-Action (VLA)',
-      icon: '💬',
-      description: 'Integrate state-of-the-art AI models for cognitive planning and autonomous decision-making.',
-      link: '/module-04-vla',
-    },
-  ];
-
+function ModulesSection() {
   return (
-    <section id="modules" className={styles.modules}>
+    <section className={styles.modules}>
       <div className="container">
+        <h2>Course Modules</h2>
         <div className="row">
           {modules.map((module, idx) => (
-            <div key={idx} className={clsx('col col--3', styles.moduleCard)}>
-              <Link to={module.link}>
+            <div className="col col--6" key={idx}>
+              <div className={styles.moduleCard}>
                 <div className="card">
                   <div className="card__header">
-                    <h3>{module.icon} {module.title}</h3>
+                    <h3>
+                      {module.icon}
+                      {module.title}
+                    </h3>
                   </div>
                   <div className="card__body">
                     <p>{module.description}</p>
                   </div>
                   <div className="card__footer">
-                    <button className="button button--primary button--block">Start Module</button>
+                    <Link
+                      className="button button--secondary button--block"
+                      to={module.link}
+                    >
+                      Explore Module
+                    </Link>
                   </div>
                 </div>
-              </Link>
+              </div>
             </div>
           ))}
         </div>
@@ -85,69 +108,69 @@ function HomepageModules() {
   );
 }
 
-function HomepageCourseInfo() {
+function CourseInfoSection() {
   return (
-    <section className={styles.courseInfo}>
+    <div className={styles.courseInfo}>
       <div className="container">
-        <h2>Course at a Glance</h2>
         <div className="row">
-          <div className="col col--4">
-            <h3>Duration</h3>
-            <p>8-12 weeks (self-paced)</p>
-          </div>
-          <div className="col col--4">
-            <h3>Format</h3>
-            <p>4 modules, 12 chapters, hands-on projects</p>
-          </div>
-          <div className="col col--4">
+          <div className="col col--6">
             <h3>Prerequisites</h3>
-            <p>Python, AI/ML basics, Linux terminal</p>
+            <p>
+              This book is designed for intermediate-level developers with a solid understanding of Python and basic familiarity with linear algebra and calculus.
+            </p>
+          </div>
+          <div className="col col--6">
+            <h3>Hands-On Projects</h3>
+            <p>
+              Each module includes practical, hands-on projects that allow you to apply the concepts you've learned in a real-world context.
+            </p>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
 
-function HomepageTechStack() {
-  const tech = [
-    { name: 'ROS 2 Humble', icon: '🤖' },
-    { name: 'Python 3.10+', icon: '🐍' },
-    { name: 'Gazebo', icon: '⚙️' },
-    { name: 'Unity', icon: '✨' },
-    { name: 'NVIDIA Isaac Sim', icon: '🚀' },
-  ];
+function TechStackSection() {
   return (
-    <section className={styles.techStack}>
+    <div className={styles.techStack}>
       <div className="container">
-        <h2>What You'll Use</h2>
+        <h2>Technology Stack</h2>
         <div className="row">
-          {tech.map((item, idx) => (
-            <div key={idx} className={clsx('col col--2', styles.techBadge)}>
-              {item.icon} {item.name}
-            </div>
-          ))}
+          <div className="col">
+            <div className={styles.techBadge}>ROS 2</div>
+          </div>
+          <div className="col">
+            <div className={styles.techBadge}>Gazebo</div>
+          </div>
+          <div className="col">
+            <div className={styles.techBadge}>Isaac Sim</div>
+          </div>
+          <div className="col">
+            <div className={styles.techBadge}>PyTorch</div>
+          </div>
+          <div className="col">
+            <div className={styles.techBadge}>Docker</div>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
 
-
-function Home() {
-  const {siteConfig} = useDocusaurusContext();
+export default function Home() {
+  const { siteConfig } = useDocusaurusContext();
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
+      title={`${siteConfig.title}`}
+      description="A technical book on AI systems operating in the physical world."
+    >
       <HomepageHeader />
       <main>
-        <HomepageModules />
-        <HomepageCourseInfo />
-        <HomepageTechStack />
+        <ModulesSection />
+        <CourseInfoSection />
+        <TechStackSection />
       </main>
     </Layout>
   );
 }
-
-export default Home;

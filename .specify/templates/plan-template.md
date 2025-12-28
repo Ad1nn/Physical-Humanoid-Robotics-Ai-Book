@@ -39,6 +39,11 @@
 - [ ] **Code Standards**: Does the implementation plan adhere to Python (PEP 8, type hints) and ROS 2 (`rclpy`) best practices?
 - [ ] **Legal & Ethics**: Does the feature respect the MIT/CC BY 4.0 licenses and avoid prohibited applications (weaponization, surveillance)?
 - [ ] **Technical Constraints**: Does the plan respect the defined technical stack (ROS 2 Humble, Python 3.10, etc.)?
+- [ ] **User-Centric Personalization**: Does the feature adapt to the user's background and expertise?
+- [ ] **Seamless Authentication**: Is the authentication process low-friction and secure?
+- [ ] **Privacy-Focused Data Collection**: Does the feature collect only necessary data and provide user control?
+- [ ] **Accessible Multilingual Support**: Does the feature support translation where appropriate?
+- [ ] **Non-Intrusive Feature Integration**: Is the feature optional and non-disruptive?
 
 ## Project Structure
 

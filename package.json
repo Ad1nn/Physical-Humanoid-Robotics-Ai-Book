@@ -15,10 +15,14 @@
     "test": "jest"
   },
   "dependencies": {
+    "@auth0/auth0-react": "^2.11.0",
     "@docusaurus/core": "3.x",
     "@docusaurus/preset-classic": "3.x",
     "@mdx-js/react": "^3.0.0",
+    "axios": "^1.13.2",
+    "better-auth": "^1.4.9",
     "clsx": "^2.0.0",
+    "knex": "^3.1.0",
     "prism-react-renderer": "^2.3.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",

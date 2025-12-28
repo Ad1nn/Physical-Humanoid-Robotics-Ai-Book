@@ -1,25 +1,3 @@
----
-id: 8
-title: Verify Docusaurus Site and Module Integration
-stage: green
-date: 2025-12-23
-surface: agent
-model: gemini-pro
-feature: 004-module4-vla
-branch: 004-module4-vla
-user: SYSTEM
-command: continue from last task
-labels: ["docusaurus", "verification", "module-integration"]
-links:
-  spec: null
-  ticket: null
-  adr: null
-  pr: null
-files:
-  - .playwright-mcp/homepage-check-port3000.md
-tests: []
----
-
 ## Prompt
 
 continue from last task

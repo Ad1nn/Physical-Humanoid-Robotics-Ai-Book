@@ -1,8 +1,20 @@
 <!--
 Sync Impact Report:
-- Version change: 1.1.1 → 1.2.0
-- List of modified principles: Added UI/UX principles.
-- Added sections: UI/UX Principles, Design Quality Standards, Component Standards, Content Presentation Standards, Navigation Standards, Performance Standards, UI/UX Technical Constraints, UI/UX Scope, UI/UX Success Criteria, UI/UX Deliverables.
+- Version change: 1.2.0 → 1.3.0
+- List of modified principles:
+  - Added: User-Centric Personalization
+  - Added: Seamless Authentication
+  - Added: Privacy-Focused Data Collection
+  - Added: Accessible Multilingual Support
+  - Added: Non-Intrusive Feature Integration
+- Added sections:
+  - Authentication (Better Auth)
+  - User Background Collection
+  - Content Personalization
+  - Urdu Translation
+  - Privacy & Security
+  - User Experience
+  - Performance
 - Removed sections: None.
 - Templates requiring updates:
   - ⚠ .specify/templates/plan-template.md
@@ -28,6 +40,22 @@ The content will be structured to guide learners from beginner to expert. Each m
 
 ### IV. Simulation-First Approach
 The primary learning environment is simulation. All projects and examples must be runnable in a simulated environment, with physical hardware being an optional extension.
+
+### V. User-Centric Personalization
+Content complexity and presentation must adapt to the user's declared background and expertise to provide a tailored learning experience.
+
+### VI. Seamless Authentication
+User authentication must be a low-friction experience, offering common social providers and a straightforward email/password option.
+
+### VII. Privacy-Focused Data Collection
+Only the minimum necessary user data for personalization will be collected, with full user control over their data, including deletion.
+
+### VIII. Accessible Multilingual Support
+The platform will provide high-quality, real-time translation to support a global audience, starting with Urdu.
+
+### IX. Non-Intrusive Feature Integration
+New features like personalization and translation must be optional and not disrupt the core reading experience for users who choose not to use them.
+
 
 ## UI/UX Principles
 ### I. Professional technical documentation aesthetic
@@ -75,6 +103,45 @@ physical-ai-book/
 - Clear safety warnings must be provided before any instructions related to physical hardware deployment.
 - The project and its outputs must not be used for weaponization or surveillance applications.
 
+### Authentication (Better Auth)
+- Secure signup/signin flow.
+- Email/password and OAuth options (Google, GitHub).
+- User profile storage with background information.
+- Session management and persistence.
+- Password reset functionality.
+
+### User Background Collection
+- Software background questions:
+  - Python proficiency (Beginner/Intermediate/Advanced)
+  - ROS experience (None/Beginner/Experienced)
+  - AI/ML knowledge (Basic/Intermediate/Advanced)
+  - Simulation tools experience (None/Some/Extensive)
+- Hardware background questions:
+  - Linux experience (None/Basic/Advanced)
+  - Robotics hardware exposure (None/Hobby/Professional)
+  - GPU availability (None/Basic/High-end)
+  - Isaac Sim access (Cloud/Local/None)
+
+### Content Personalization
+- Three complexity levels: Beginner, Intermediate, Advanced.
+- Personalization adjusts:
+  - Explanation depth (more/less detail)
+  - Code example complexity
+  - Prerequisite assumptions
+  - Terminology definitions
+- User can override auto-personalization manually.
+- Personalization button at chapter start.
+- Settings persist across sessions.
+
+### Urdu Translation
+- Toggle button at chapter start.
+- Real-time translation using AI (OpenAI, Google Translate API).
+- Technical terms handled appropriately (transliterate or keep English).
+- Code blocks remain in English.
+- Translation cached for performance.
+- User preference saved.
+
+
 ## Design Quality Standards
 - Consistent visual hierarchy across all pages
 - Clear typography (readability score 80+)
@@ -108,6 +175,10 @@ physical-ai-book/
 - Lighthouse score > 90
 - Optimized images (WebP format)
 - Lazy loading for heavy content
+- Authentication adds < 200ms page load.
+- Personalization computed client-side (no API delay).
+- Translation cached after first request.
+- Background questions < 2 minutes to complete.
 
 ## Technical Constraints
 
@@ -117,6 +188,11 @@ physical-ai-book/
 - **Python:** 3.10+
 - **OS:** Ubuntu 22.04 LTS (Docker recommended for cross-platform compatibility)
 - **Hardware:** Minimum 16GB RAM and an NVIDIA GPU with at least 6GB VRAM.
+- **Authentication:** Better Auth library
+- **Database:** Neon Postgres for user data
+- **Translation:** OpenAI or Google Translate API
+- **Frontend:** React state management for personalization
+- **Framework:** Docusaurus compatibility maintained, no breaking changes to existing UI.
 
 ## UI/UX Technical Constraints
 - Docusaurus 3.x
@@ -153,6 +229,22 @@ The book will be structured as follows, with approximate word counts:
   - Final Capstone Project
 - Each chapter: learning objectives, theory, code examples, exercises, summary
 
+## Privacy & Security
+- GDPR compliance for user data.
+- Minimal data collection.
+- User can delete account and data.
+- Secure password hashing.
+- Session security (HttpOnly cookies).
+- No tracking without consent.
+
+## User Experience
+- Optional signup (can read without login).
+- Personalization gracefully degrades if not logged in.
+- Translation works for logged-in users only.
+- Clear value proposition for creating account.
+- One-time background questions at signup.
+- Easy toggle for personalization/translation.
+
 ## UI/UX Scope
 - Homepage/landing page design
 - Custom theme configuration
@@ -161,6 +253,15 @@ The book will be structured as follows, with approximate word counts:
 - Interactive UI components
 - Assessment quiz interfaces
 
+## Success Criteria
+- User can signup and provide background in < 3 minutes.
+- Personalized content matches user skill level.
+- Urdu translation readable and contextually accurate.
+- Features don't disrupt non-logged-in experience.
+- 80%+ users find personalization helpful.
+- Translation covers 95%+ of chapter content.
+
+
 ## UI/UX Success Criteria
 - Professional appearance comparable to top tech documentation sites
 - Students can navigate intuitively without training
@@ -168,6 +269,17 @@ The book will be structured as follows, with approximate word counts:
 - Mobile experience equals desktop quality
 - Zero accessibility violations
 - Positive user feedback on readability
+
+## Deliverables
+1. Better Auth integration (signup, signin, profile)
+2. User background questionnaire UI
+3. Background data storage schema
+4. Personalization engine (content adjustment logic)
+5. Personalization toggle UI component
+6. Translation service integration
+7. Translation toggle UI component
+8. User settings page
+9. Privacy policy and data handling documentation
 
 ## UI/UX Deliverables
 - Custom Docusaurus theme
@@ -181,4 +293,4 @@ The book will be structured as follows, with approximate word counts:
 
 This constitution is the single source of truth for all project principles and standards. All contributions, reviews, and decisions must align with it. Amendments require a documented proposal, review, and an update to the version number according to semantic versioning.
 
-**Version**: 1.2.0 | **Ratified**: 2025-12-21 | **Last Amended**: 2025-12-22
+**Version**: 1.3.0 | **Ratified**: 2025-12-21 | **Last Amended**: 2025-12-24

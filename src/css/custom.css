@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
 /**
  * Any CSS included here will be global.
  * You can add any CSS code here that applies to the entire website.
@@ -5,44 +7,44 @@
 
 /* Robotics/AI Themed Color Palette */
 :root {
-  --ifm-color-primary: #007bff; /* A vibrant blue for primary actions/highlights */
-  --ifm-color-primary-dark: #0069d9;
-  --ifm-color-primary-darker: #0062cc;
-  --ifm-color-primary-darkest: #005cbf;
-  --ifm-color-primary-light: #288cff;
-  --ifm-color-primary-lighter: #429aff;
-  --ifm-color-primary-lightest: #6bb0ff;
+  --ifm-color-primary: #007BFF; /* A slightly desaturated but still vibrant blue for light mode primary */
+  --ifm-color-primary-dark: #0069D9;
+  --ifm-color-primary-darker: #0062CC;
+  --ifm-color-primary-darkest: #005CBF;
+  --ifm-color-primary-light: #288CFF;
+  --ifm-color-primary-lighter: #429AFF;
+  --ifm-color-primary-lightest: #6BB0FF;
 
-  --ifm-color-success: #28a745; /* Green for success */
-  --ifm-color-info: #17a2b8;    /* Cyan for info */
-  --ifm-color-warning: #ffc107; /* Yellow for warnings */
-  --ifm-color-danger: #dc3545;  /* Red for errors/danger */
+  --ifm-color-success: #28A745; /* Green for success (retained) */
+  --ifm-color-info: #17A2B8;    /* Cyan for info (retained) */
+  --ifm-color-warning: #FFC107; /* Yellow for warnings (retained) */
+  --ifm-color-danger: #DC3545;  /* Red for errors/danger (retained) */
 
-  --ifm-background-color: #f8f9fa; /* Light background */
-  --ifm-font-color-base: #212529; /* Dark text */
-  --ifm-heading-color: #343a40; /* Slightly darker headings */
+  --ifm-background-color: #F0F2F5; /* Very light gray background */
+  --ifm-font-color-base: #333333; /* Dark gray text */
+  --ifm-heading-color: #1A1A1A; /* Darker gray headings */
 
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.05); /* Light code highlight */
 }
 
 /* Dark mode adjustments */
 [data-theme='dark'] {
-  --ifm-color-primary: #66b3ff; /* Lighter blue for dark mode primary */
-  --ifm-color-primary-dark: #4d94ff;
-  --ifm-color-primary-darker: #3385ff;
-  --ifm-color-primary-darkest: #0066ff;
-  --ifm-color-primary-light: #80c6ff;
-  --ifm-color-primary-lighter: #99d4ff;
-  --ifm-color-primary-lightest: #b3e0ff;
+  --ifm-color-primary: #00FFFF; /* Electric Cyan for dark mode primary */
+  --ifm-color-primary-dark: #00C2C2;
+  --ifm-color-primary-darker: #009999;
+  --ifm-color-primary-darkest: #006666;
+  --ifm-color-primary-light: #33FFFF;
+  --ifm-color-primary-lighter: #66FFFF;
+  --ifm-color-primary-lightest: #99FFFF;
 
-  --ifm-color-success: #2ecc71; /* Green for success */
-  --ifm-color-info: #00bcd4;    /* Cyan for info */
-  --ifm-color-warning: #ffeb3b; /* Yellow for warnings */
-  --ifm-color-danger: #ef5350;  /* Red for errors/danger */
+  --ifm-color-success: #39FF14; /* Neon Green for success */
+  --ifm-color-info: #BF00FF;    /* Vibrant Purple for info */
+  --ifm-color-warning: #FFEB3B; /* Yellow for warnings (retained) */
+  --ifm-color-danger: #EF5350;  /* Red for errors/danger (retained) */
 
-  --ifm-background-color: #212529; /* Dark background */
-  --ifm-font-color-base: #f8f9fa; /* Light text */
-  --ifm-heading-color: #e9ecef; /* Slightly lighter headings */
+  --ifm-background-color: #0D0D0D; /* Deep black background */
+  --ifm-font-color-base: #E0E0E0; /* Slightly muted white text */
+  --ifm-heading-color: #FFFFFF; /* Bright white headings */
 
   --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.1); /* Dark mode code highlight */
 }
@@ -67,7 +69,7 @@
 /* Base typography */
 :root {
   --ifm-font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-  --ifm-heading-font-family: var(--ifm-font-family-base);
+  --ifm-heading-font-family: 'Rajdhani', sans-serif; /* Futuristic font for headings */
   --ifm-line-height-base: 1.6;
   --ifm-paragraph-margin-bottom: 1rem;
 }
@@ -84,6 +86,7 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.2;
   margin-top: 2rem;
   margin-bottom: 1rem;
+  letter-spacing: 0.05em; /* Slightly wider letter-spacing for futuristic feel */
 }
 
 h1 { font-size: 2.5rem; }
@@ -104,11 +107,4 @@ h6 { font-size: 1rem; }
   h4 { font-size: 1.25rem; }
   h5 { font-size: 1.1rem; }
   h6 { font-size: 0.9rem; }
-}
-
-/* Example: Max width for content to prevent overly long lines on large screens */
-.main-wrapper {
-  max-width: var(--ifm-container-width);
-  margin: 0 auto;
-  padding: var(--ifm-spacing-md);
 }

@@ -3,12 +3,35 @@
  */
 
 .heroBanner {
-  padding: 6rem 0; /* More vertical space for a grander feel */
+  padding: 6rem 0 8rem; /* More padding */
   text-align: center;
   position: relative;
   overflow: hidden;
-  background-color: var(--ifm-background-color); /* Use background color for hero */
-  color: var(--ifm-font-color-base);
+  background-color: #000; /* Black background for a techy feel */
+  color: #fff;
+}
+
+.heroGrid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: grid-pan 20s linear infinite;
+  z-index: 0; /* Behind content */
+}
+
+@keyframes grid-pan {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 40px 40px;
+  }
 }
 
 @media screen and (max-width: 996px) {
@@ -22,6 +45,9 @@
   font-size: 4rem; /* Larger title */
   margin-bottom: 1.5rem;
   line-height: 1.1;
+  text-shadow: 0 0 10px var(--ifm-color-primary), 0 0 20px var(--ifm-color-primary); /* Subtle glow effect */
+  position: relative; /* Ensure z-index works */
+  z-index: 1; /* Bring title above the grid */
 }
 
 .hero__subtitle {
@@ -29,6 +55,8 @@
   font-size: 2rem; /* Larger subtitle */
   margin-bottom: 2rem;
   font-weight: 300; /* Lighter weight for modern feel */
+  position: relative;
+  z-index: 1; /* Bring subtitle above the grid */
 }
 
 .heroDescription {
@@ -39,16 +67,20 @@
   margin-left: auto;
   margin-right: auto;
   line-height: 1.6;
+  position: relative;
+  z-index: 1; /* Bring description above the grid */
 }
 
 .heroImage {
   margin: 3rem 0; /* More space around image */
+  position: relative; /* Ensure z-index works */
+  z-index: 1; /* Bring image above the grid */
 }
 
 .heroImage img {
   max-width: 350px; /* Slightly larger image */
   height: auto;
-  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2)); /* Subtle shadow for depth */
+  filter: drop-shadow(0 0 20px var(--ifm-color-primary)) drop-shadow(0 0 40px rgba(0, 255, 255, 0.5)); /* Neon glow effect */
 }
 
 .buttons {
@@ -68,9 +100,6 @@
 .modules {
   padding: 6rem 0; /* More vertical space */
   background-color: var(--ifm-color-emphasis-100); /* Slightly different background for section contrast */
-  width: 100%;
-  max-width: var(--ifm-container-width);
-  margin: 0 auto;
 }
 
 .modules h2 {
@@ -87,7 +116,7 @@
 
 .moduleCard:hover {
   transform: translateY(-8px); /* More pronounced hover effect */
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
+  box-shadow: 0 0 20px var(--ifm-color-primary); /* Stronger glow on hover */
 }
 
 .moduleCard .card {
@@ -96,8 +125,8 @@
   flex-direction: column;
   justify-content: space-between;
   border-radius: 10px; /* More rounded cards */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Clearer shadow */
-  border: none; /* Remove subtle border, rely on shadow */
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2); /* Subtle initial glow */
+  border: 1px solid rgba(0, 255, 255, 0.3); /* Subtle border */
   background-color: var(--ifm-background-color);
   overflow: hidden; /* Ensure rounded corners clip content */
 }
@@ -193,17 +222,18 @@
   justify-content: center;
   padding: 0.8rem 1.5rem;
   border-radius: 30px; /* Pill-shaped badges */
-  border: 1px solid var(--ifm-color-emphasis-300);
+  border: 1px solid var(--ifm-color-primary); /* Distinct border */
   background-color: var(--ifm-background-color);
   margin-left: auto;
   margin-right: auto;
   max-width: 220px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08); /* More prominent shadow */
-  transition: transform 0.2s ease;
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.3); /* Subtle initial glow */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .techBadge:hover {
   transform: translateY(-3px);
+  box-shadow: 0 0 15px var(--ifm-color-primary); /* Stronger glow on hover */
 }
 
 .techBadge svg {

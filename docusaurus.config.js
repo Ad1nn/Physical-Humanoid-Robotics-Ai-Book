@@ -25,7 +25,13 @@ const config = {
   staticDirectories: ['static_new'],
 
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  // Configuration for markdown parsing, including how to handle broken links
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'warn', // Moved from top-level to here
+    },
+  },
+
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you

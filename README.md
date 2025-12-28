@@ -38,6 +38,16 @@ To get the Docusaurus site running locally, follow these steps:
     ```
     The generated files will be placed in the `build/` directory.
 
+## New Features: Personalization, Authentication, and Translation
+
+This project includes several new features designed to enhance the learning experience:
+
+*   **Authentication**: Users can create accounts and sign in using email/password or OAuth (Google, GitHub). This allows for a personalized experience and the ability to save progress.
+*   **Personalization**: The content complexity and presentation adapt to the user's declared background and expertise. This is designed to provide a tailored learning experience for users of all skill levels.
+*   **Translation**: The platform will provide high-quality, real-time translation to support a global audience, starting with Urdu.
+
+These features are designed to be non-intrusive and optional. Users can still access the book's content without creating an account.
+
 ## ROS 2 Development Environment
 
 For running the ROS 2 code examples and projects, a dedicated development environment is recommended. Please refer to the [Prerequisites & Setup Guide](/prerequisites) in the book documentation for detailed instructions on setting up your ROS 2 environment, preferably using Docker.
