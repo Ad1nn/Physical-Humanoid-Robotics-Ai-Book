@@ -1,4 +1,4 @@
 
-QDRANT_API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.4cmClMkR3cM7kAOlmsTQVmTUBOWMM4A6ttrXZuXGKDc"
-QDRANT_URL = "https://4687286f-794a-4f00-9151-3a60f47e04c9.europe-west3-0.gcp.cloud.qdrant.io:6333"
-COHERE_API_KEY = "anPC0OdKfem3X2iz43Ov80m1qSU0uS5jut5QKGId"
+QDRANT_API_KEY = "Qdrant_api_key"
+QDRANT_URL = "Qdrant_url"
+COHERE_API_KEY = "Cohere_api_key "
