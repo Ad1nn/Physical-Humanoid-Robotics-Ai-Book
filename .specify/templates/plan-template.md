@@ -45,6 +45,14 @@
 - [ ] **Accessible Multilingual Support**: Does the feature support translation where appropriate?
 - [ ] **Non-Intrusive Feature Integration**: Is the feature optional and non-disruptive?
 
+### RAG Assistant Constitution Check
+- [ ] **Accuracy Over Creativity**: Does the feature prioritize factual accuracy from retrieved content over creative or speculative responses?
+- [ ] **Strict Content Grounding**: Are all generated answers directly and verifiably grounded in the retrieved text?
+- [ ] **Zero Hallucination**: Does the feature explicitly state when it cannot find an answer, rather than inventing one?
+- [ ] **Deterministic & Explainable**: Is the entire pipeline designed for reproducibility and debuggability?
+- [ ] **Clear Separation of Concerns**: Is the RAG pipeline modular (retrieval, reasoning, generation)?
+- [ ] **Engineering-First Implementation**: Does the plan follow production-readiness best practices (e.g., versioned prompts, testing)?
+
 ## Project Structure
 
 ### Documentation (this feature)

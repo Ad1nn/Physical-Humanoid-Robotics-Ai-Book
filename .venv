@@ -1,0 +1,4 @@
+
+QDRANT_API_KEY = "Qdrant_api_key"
+QDRANT_URL = "Qdrant_url"
+COHERE_API_KEY = "Cohere_api_key "

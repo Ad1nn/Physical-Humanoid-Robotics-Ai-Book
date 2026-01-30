@@ -1,20 +1,21 @@
 <!--
 Sync Impact Report:
-- Version change: 1.2.0 → 1.3.0
+- Version change: 1.3.0 → 1.4.0
 - List of modified principles:
-  - Added: User-Centric Personalization
-  - Added: Seamless Authentication
-  - Added: Privacy-Focused Data Collection
-  - Added: Accessible Multilingual Support
-  - Added: Non-Intrusive Feature Integration
+  - Added: RAG-Based AI Assistant Principles (new section)
+    - Accuracy Over Creativity
+    - Strict Content Grounding
+    - Zero Hallucination
+    - Deterministic & Explainable Behavior
+    - Clear Separation of Concerns
+    - Engineering-First Implementation
 - Added sections:
-  - Authentication (Better Auth)
-  - User Background Collection
-  - Content Personalization
-  - Urdu Translation
-  - Privacy & Security
-  - User Experience
-  - Performance
+  - RAG-Based AI Assistant Principles
+  - RAG Assistant Standards
+  - RAG Assistant Technical Constraints
+  - RAG Assistant Architectural Rules
+  - RAG Assistant Performance Constraints
+  - RAG Assistant Success Criteria
 - Removed sections: None.
 - Templates requiring updates:
   - ⚠ .specify/templates/plan-template.md
@@ -72,6 +73,26 @@ The website must prioritize performance, aiming for fast page loads and a smooth
 
 ### V. Student-centric user experience
 The user experience must be tailored to the needs of students, facilitating easy navigation, clear content presentation, and engaging interactive elements.
+
+## RAG-Based AI Assistant Principles
+
+### I. Accuracy Over Creativity
+The assistant's primary goal is to provide accurate, factual information based *only* on the book's content. Creative, speculative, or conversational responses are strictly prohibited.
+
+### II. Strict Content Grounding
+All generated answers must be directly and verifiably grounded in the text retrieved from the vector database. The system must not invent information or synthesize content beyond the scope of the retrieved documents.
+
+### III. Zero Hallucination
+The assistant is forbidden from hallucinating. If the retrieved context does not contain the answer to a user's query, the assistant must state that it does not have the information, rather than attempting to guess.
+
+### IV. Deterministic & Explainable Behavior
+For a given query and retrieved context, the assistant's output should be reproducible. The entire retrieval and generation pipeline must be designed for debuggability, allowing developers to trace the source of every part of an answer.
+
+### V. Clear Separation of Concerns
+The RAG pipeline must be modular, with a clear and distinct separation between the retrieval, reasoning, and generation stages. This ensures maintainability and allows for independent evaluation of each component.
+
+### VI. Engineering-First Implementation
+The system will be built with production-readiness in mind, following software engineering best practices, including version control for prompts, rigorous testing, and clear deployment pathways.
 
 ## Key Standards
 
@@ -180,6 +201,26 @@ physical-ai-book/
 - Translation cached after first request.
 - Background questions < 2 minutes to complete.
 
+## RAG Assistant Standards
+
+### Answer Generation
+- All answers must be directly grounded in the retrieved text segments.
+- The "selected-text" query mode must ONLY use the user-highlighted text as its context.
+- The assistant is forbidden from using external knowledge or any information not explicitly passed into its context window.
+- All responses must be reproducible from the same set of inputs.
+
+### Retrieval & Data
+- Retrieval logic must be traceable and debuggable, showing which document chunks were used for a given answer.
+- Prompts used in the pipeline must be explicit, version-controlled, and stored in the repository.
+- Embeddings must be generated using the specified model (Cohere Embed v3) and stored in the designated vector database (Qdrant Cloud).
+
+### Security & Safety
+- No user conversations or queries will be stored persistently.
+- API keys and other secrets must not be exposed on the client-side or in logs.
+- All user input must be sanitized and validated to prevent prompt injection and other attacks.
+- The system must enforce strict context isolation between different user queries.
+- No user data will be used for training any models.
+
 ## Technical Constraints
 
 - **ROS 2:** Humble Hawksbill (LTS)
@@ -200,6 +241,17 @@ physical-ai-book/
 - Tailwind CSS or vanilla CSS (custom theme)
 - No breaking changes to existing content
 - Must work with all 4 modules
+
+## RAG Assistant Technical Constraints
+
+- **Frontend:** The assistant will be integrated into the existing Docusaurus site.
+- **Backend:** A new FastAPI service will be created to host the RAG pipeline.
+- **Agent Framework:** The core logic will use the OpenAI Agents SDK.
+- **LLM:** Cohere Command / Command R+
+- **Embeddings Model:** Cohere Embed v3
+- **Vector Database:** Qdrant Cloud
+- **Metadata Storage:** Neon Postgres
+- **Deployment:** The Docusaurus frontend will be deployed on Vercel. The FastAPI backend will be deployed on Railway or Render.
 
 ## Book Structure
 
@@ -270,6 +322,30 @@ The book will be structured as follows, with approximate word counts:
 - Zero accessibility violations
 - Positive user feedback on readability
 
+## RAG Assistant Architectural Rules
+
+- The RAG pipeline must be modular to allow for independent upgrades of the retriever, ranker, and generator.
+- No direct calls to the LLM are permitted without a preceding retrieval step.
+- The agent must support two distinct modes:
+  1.  **Full-book query mode:** Searches the entire book content.
+  2.  **Selected-text-only query mode:** Uses only the text selected by the user in the browser.
+- Retrieval must be traceable to the source documents, chapters, and sections.
+- The system must incorporate defenses against prompt injection.
+
+## RAG Assistant Performance Constraints
+
+- **Retrieval Latency:** p95 latency for retrieving document chunks from Qdrant must be ≤ 1.5 seconds.
+- **End-to-End Response Time:** p95 latency for a complete user query to final response must be ≤ 5 seconds.
+- **Caching:** Embeddings for document chunks will be pre-computed and cached.
+
+## RAG Assistant Success Criteria
+
+- **Functional Correctness:** Users can query the book's content and receive answers that are factually correct according to the source material.
+- **Zero Hallucination (Selected Text):** When using the selected-text feature, the assistant never provides information outside of that selection.
+- **Traceability:** All generated answers can be traced back to the specific source text chunks used as context.
+- **Verification:** The system passes a suite of manual verification tests designed to probe for common failure modes (e.g., out-of-scope questions, adversarial inputs).
+- **Deployment:** The entire system is successfully deployed to the specified production environments (Vercel/Railway/Render).
+
 ## Deliverables
 1. Better Auth integration (signup, signin, profile)
 2. User background questionnaire UI
@@ -293,4 +369,4 @@ The book will be structured as follows, with approximate word counts:
 
 This constitution is the single source of truth for all project principles and standards. All contributions, reviews, and decisions must align with it. Amendments require a documented proposal, review, and an update to the version number according to semantic versioning.
 
-**Version**: 1.3.0 | **Ratified**: 2025-12-21 | **Last Amended**: 2025-12-24
+**Version**: 1.4.0 | **Ratified**: 2025-12-21 | **Last Amended**: 2025-12-29
